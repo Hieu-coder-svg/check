@@ -3,12 +3,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package model;
+
 import java.math.BigDecimal;
+
 /**
  *
  * @author ASUS
  */
 public class Product {
+
     private int id;
     private String name;
     private String description;
@@ -17,4 +20,83 @@ public class Product {
     private String imgUrl;
     private Category category;
     private double shelfLifeHours;
+
+    public Product() {
+    }
+
+    public Product(int id, String name, String description, BigDecimal price, int stock, String imgUrl, Category category, double shelfLifeHours) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.stock = stock;
+        this.imgUrl = imgUrl;
+        this.category = category;
+        this.shelfLifeHours = shelfLifeHours;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
+    public int getStock() {
+        return stock;
+    }
+
+    public void setStock(int stock) {
+        this.stock = stock;
+    }
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public double getShelfLifeHours() {
+        return shelfLifeHours;
+    }
+
+    public void setShelfLifeHours(double shelfLifeHours) {
+        this.shelfLifeHours = shelfLifeHours;
+    }
+
 }
