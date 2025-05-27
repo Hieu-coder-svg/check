@@ -20,6 +20,7 @@ public class ProductSuggestion {
     public ProductSuggestion() {
     }
 
+    
     public ProductSuggestion(int id, String suggestedByBmi, Product product, Timestamp CreatedAt) {
         this.id = id;
         this.suggestedByBmi = suggestedByBmi;
