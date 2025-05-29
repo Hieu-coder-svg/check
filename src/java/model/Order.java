@@ -4,7 +4,7 @@
  */
 package model;
 
-import java.math.BigDecimal;
+
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -16,13 +16,13 @@ public class Order {
     private int id;
     private User user;
     private Timestamp orderDate;
-    private BigDecimal totalAmount;
+    private double totalAmount;
     private String paymentMethod;
     private String status;
     private User shipper;
     private List<OrderDetail> orderDetails;
 
-    public Order(int id, User user, Timestamp orderDate, BigDecimal totalAmount, String paymentMethod, String status, User shipper, List<OrderDetail> orderDetails) {
+    public Order(int id, User user, Timestamp orderDate, double totalAmount, String paymentMethod, String status, User shipper, List<OrderDetail> orderDetails) {
         this.id = id;
         this.user = user;
         this.orderDate = orderDate;
@@ -60,11 +60,11 @@ public class Order {
         this.orderDate = orderDate;
     }
 
-    public BigDecimal getTotalAmount() {
+    public double getTotalAmount() {
         return totalAmount;
     }
 
-    public void setTotalAmount(BigDecimal totalAmount) {
+    public void setTotalAmount(double totalAmount) {
         this.totalAmount = totalAmount;
     }
 
