@@ -6,6 +6,7 @@
 package controller;
 
 
+import dal.DAOOrder;
 import dal.DAOProduct;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -23,7 +24,7 @@ import model.Product;
  *
  * @author HP
  */
-public class productDetailServlet extends HttpServlet {
+public class ProductDetailServlet extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -60,9 +61,46 @@ public class productDetailServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        DAOProduct dao = new DAOProduct();
-         List<Product> products = dao.getAllProduct();
-         request.setAttribute("product",products );
+           String productIdStr = request.getParameter("productIdStr");
+        if (productIdStr == null || productIdStr.isEmpty()) {
+            request.setAttribute("error", "Product ID is missing.");
+            request.getRequestDispatcher("productDetail.jsp").forward(request, response);
+            return;
+        }
+
+        int productId;
+        try {
+            productId = Integer.parseInt(productIdStr);
+        } catch (NumberFormatException e) {
+            request.setAttribute("error", "Invalid Product ID.");
+            request.getRequestDispatcher("productDetail.jsp").forward(request, response);
+            return;
+        }
+
+      
+        Product product = DAOProduct.getProductById(productId);
+        if (product == null) {
+            request.setAttribute("error", "Product not found with ID: " + productId);
+            request.getRequestDispatcher("productDetail.jsp").forward(request, response);
+            return;
+        }
+
+  
+        String productName = product.getName() != null ? product.getName() : "Unknown Product";
+        String description = product.getDescription() != null ? product.getDescription() : "No description available";
+        Double price = product.getPrice() != 0.0 ? product.getPrice() : 0.0;
+        int stock = product.getStock()!=0?product.getStock():0;
+         String img = product.getImgUrl()!=null?product.getImgUrl():"No image avaiable";
+        
+        request.setAttribute("productId", product.getId());
+        request.setAttribute("productName", productName);
+        request.setAttribute("description", description);
+        request.setAttribute("price", price);
+        request.setAttribute("stock", stock);
+        request.setAttribute("img", img);
+
+      
+        request.getRequestDispatcher("productDetail.jsp").forward(request, response);
         
     } 
 
@@ -76,7 +114,54 @@ public class productDetailServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+         String productIdStr = request.getParameter("productId");
+        if (productIdStr == null || productIdStr.isEmpty()) {
+            request.setAttribute("error", "Tour ID is missing.");
+            request.getRequestDispatcher("booking.jsp").forward(request, response);
+            return;
+        }
+
+        int productId;
+        try {
+            productId = Integer.parseInt(productIdStr);
+        } catch (NumberFormatException e) {
+            request.setAttribute("error", "Invalid Tour ID.");
+            request.getRequestDispatcher("productDetail.jsp").forward(request, response);
+            return;
+        }
+
+  
+        String numberStr = request.getParameter("number");
+        int number;
+        try {
+            number = Integer.parseInt(numberStr);
+            if (number <= 0) {
+                throw new NumberFormatException("Number must be greater than 0.");
+            }
+        } catch (NumberFormatException e) {
+            request.setAttribute("error", "Invalid number.");
+            request.getRequestDispatcher("productDetail.jsp").forward(request, response);
+            return;
+        }
+
+        Product product = DAOProduct.getProductById(productId);
+        if (product == null) {
+            request.setAttribute("error", "Tour not found with ID: " + productId);
+            request.getRequestDispatcher("productDetails.jsp").forward(request, response);
+            return;
+        }
+
+        double price = product.getPrice() != 0.0 ? product.getPrice() : 0.0;
+        double totalPrice = price * number;
+
+//        boolean success = DAOOrder.orderProduct(user.getId(), productId, numberOfPeople, totalPrice);
+//        if (success) {
+//            request.setAttribute("message", "Booking successful!");
+//        } else {
+//            request.setAttribute("error", "Failed to book the product. Please try again.");
+//        }
+
+        request.getRequestDispatcher("productDetail.jsp").forward(request, response);
     }
 
     /** 
