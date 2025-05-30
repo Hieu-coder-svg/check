@@ -14,7 +14,7 @@ import model.Category;
  */
 public class DAOProduct {
     public static DAOProduct INSTANCE= new DAOProduct();
-    private Connection con;
+    private static Connection con;
     private String status="OK";
 
     public DAOProduct() {
@@ -23,30 +23,7 @@ public class DAOProduct {
         }else
             INSTANCE = this;
     }
-    
-//    public List<Products> getAll() {
-//
-//        List<Products> list = new ArrayList<>();
-//        String sql = "select * from Products";
-//        //chay lenhj truy van
-//        try {
-//            PreparedStatement st = connection.prepareStatement(sql);
-//            ResultSet rs = st.executeQuery();
-//            while (rs.next()) {
-//                Products p = new Products();
-//                p.setProductID(rs.getInt("ProductID"));
-//                p.setProductName(rs.getString("ProductName"));
-//                p.setPrice(rs.getDouble("Price"));
-//                p.setQuantity(rs.getInt("Quantity"));
-//                p.setDescription(rs.getString("Description"));
-//                p.setImageURL(rs.getString("ImageURL"));
-//                list.add(p);
-//            }
-//        } catch (SQLException e) {
-//            System.out.println(e);
-//        }
-//        return list;
-//    }
+   
     public List<Product> getAllProduct(){
         List<Product> productList = new ArrayList<>();
         String sql = "select * from Product";
@@ -75,5 +52,31 @@ public class DAOProduct {
         }
         return productList;
 
+    }
+    public  static Product getProductById(int tourId) {
+        Product product = null;
+        try {
+            String sql = "SELECT * FROM Tours WHERE TourID = ?";
+            PreparedStatement statement = con.prepareStatement(sql);
+            statement.setInt(1, tourId);
+            ResultSet rs = statement.executeQuery();
+
+            if (rs.next()) {
+                 Product p = new Product();
+                p.setId(rs.getInt("id"));
+                p.setName(rs.getString("name"));
+                p.setDescription(rs.getString("description"));
+                p.setPrice(rs.getDouble("price"));
+                p.setStock(rs.getInt("stock"));
+                p.setImgUrl(rs.getString("image_url"));
+                p.setShelfLifeHours(0);         
+            }
+
+            rs.close();
+            statement.close();
+        } catch (SQLException ex) {
+            
+        }
+        return product;
     }
 }
