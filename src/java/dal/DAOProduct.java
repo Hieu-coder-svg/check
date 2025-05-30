@@ -48,7 +48,7 @@ public class DAOProduct {
 //        return list;
 //    }
     public List<Product> getAllProduct(){
-        List<Product> list = new ArrayList<>();
+        List<Product> productList = new ArrayList<>();
         String sql = "select * from Product";
         try {
             PreparedStatement st = con.prepareStatement(sql);
@@ -61,14 +61,19 @@ public class DAOProduct {
                 p.setPrice(rs.getDouble("price"));
                 p.setStock(rs.getInt("stock"));
                 p.setImgUrl(rs.getString("image_url"));
-                Category c = new Category();
-                
                 p.setShelfLifeHours(0);
+                
+                Category c = new Category();
+                c.setId(rs.getInt("id"));
+                c.setName(rs.getString("name"));
+                
+                p.setCategory(c);
+                productList.add(p);              
             }
             
         } catch (SQLException e) {
         }
-        return list;
+        return productList;
+
     }
-    
 }
