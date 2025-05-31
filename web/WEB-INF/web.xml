@@ -12,6 +12,10 @@
         <servlet-name>HomeAdminServlet</servlet-name>
         <servlet-class>controller.HomeAdminServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CustomerAccountServlet</servlet-name>
+        <servlet-class>controller.CustomerAccountServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeDisplayServlet</servlet-name>
         <url-pattern>/HomeDisplayServlet</url-pattern>
@@ -23,5 +27,9 @@
     <servlet-mapping>
         <servlet-name>HomeAdminServlet</servlet-name>
         <url-pattern>/HomeAdmin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CustomerAccountServlet</servlet-name>
+        <url-pattern>/CustomerAccount</url-pattern>
     </servlet-mapping>
 </web-app>
