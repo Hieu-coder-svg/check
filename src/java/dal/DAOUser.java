@@ -92,5 +92,12 @@ public class DAOUser {
         }
         return userList;
     }
+    public static void main(String[] args) {
+       ArrayList<User> ulist = DAOUser.INSTANCE.getUsersByRoleId(1);
+        for (int i = 0; i < ulist.size(); i++) {
+            System.out.println(ulist.get(i).getName());
+        }
+    }
+    
 
 }

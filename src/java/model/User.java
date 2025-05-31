@@ -120,5 +120,5 @@ public class User {
     public void setCreatedAt(Timestamp createdAt) {
         this.createdAt = createdAt;
     }
-
+    
 }
