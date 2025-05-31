@@ -24,8 +24,8 @@
                     <ul>
                         <li><a href="/home">Home</a></li>
                         <li><a href="/products">Products</a></li>
-                        <li><a href="/about">About Us</a></li>
-                        <li><a href="/contact">Contact</a></li>
+                        <li><a href="https://www.facebook.com/" target="_blank">Facebook</a></li>
+                        <li><a href="https://www.youtube.com/ target="_blank">Contact</a></li>
                     </ul>
                 </div>
                 <div class="footer-contact">

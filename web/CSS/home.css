@@ -16,14 +16,18 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
 
 .menu{
     font-size: 20px;
-    font-weight: bold;
+    font-weight: bold
    
 }
 .menu a{
     color: #F3F2F3;
     text-decoration: none;
     margin-left: 5%;
+    transition: color 0.3s ease;
     
+}
+.menu a:hover {
+    color: #f39c12;
 }
 
 
