@@ -22,21 +22,25 @@
                 <p>Enjoy shopping fresh and nutritious food tailored to your health goals.</p>
 
                 <!-- hien thi product -->
-                <div class="product-list">
-                <c:forEach items="${requestScope.productList}" var="o">
-                    <div class="card">
-                        <img class="card-img" src="${o.imgUrl}" alt="Product Image">
-                        <div class="card-body">
-                            <p>Product: ${o.name}</p>
-                            <p>Description: ${o.description}</p>
-                            <p>Price: ${o.price}</p>
-                            <p>Stock: ${o.stock}</p>
-                            <p>Shelf Life Hours: ${o.shelfLifeHours} hours</p>
+                <div class="list-title">
+                    <h2>Product List:</h2></br>
+                </div>
+                <div>
+                    <div class="product-list">                  
+                    <c:forEach items="${requestScope.productList}" var="o">
+                        <div class="card">
+                            <img class="card-img" src="${o.imgUrl}" alt="Product Image">
+                            <div class="card-body">
+                                <p>Product: ${o.name}</p>
+                                <p>Description: ${o.description}</p>
+                                <p>Price: ${o.price}</p>
+                                <p>Stock: ${o.stock}</p>
+                                <p>Shelf Life Hours: ${o.shelfLifeHours} hours</p>
+                            </div>
                         </div>
-                    </div>
-                </c:forEach>
+                    </c:forEach>
+                </div>
             </div>
-            </div>
 
 
 
@@ -44,6 +48,6 @@
 
 
 
-        <jsp:include page="footer.jsp"></jsp:include>
+            <jsp:include page="footer.jsp"></jsp:include>
     </body>
 </html>

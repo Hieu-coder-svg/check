@@ -13,7 +13,32 @@
         <link href="../CSS/home.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
-        <h1>Hello World!</h1>
-        
+        <footer class="footer">
+            <div class="footer-container">
+                <div class="footer-comment">
+                    <h3>Healthy Food</h3>
+                    <p>We are committed to providing fresh, safe, and nutritious food for your health.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Links:</h4>
+                    <ul>
+                        <li><a href="/home">Home</a></li>
+                        <li><a href="/products">Products</a></li>
+                        <li><a href="/about">About Us</a></li>
+                        <li><a href="/contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4>Contact us:</h4>
+                    <p>Owner Email: duykhanh2004tcmc@gmail.com</p>
+                    <p>Supporting Email: support@healthyfood.com</p>
+                    <p>Phone: 0123 456 789</p>
+                    <p>Address: 113 Wall St., Gotham City</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 Healthy Food. All rights reserved.</p>
+            </div>
+        </footer>
     </body>
 </html>

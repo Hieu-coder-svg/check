@@ -6,15 +6,17 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     Created on : May 29, 2025, 6:41:18 PM
     Author     : ASUS
 */
+/*header css*/
 .header{
-    background-color: #171717;
+    background-color: #2c3e50;
     text-align: center;
-    color:#FFFFFF;
+    color:#A8E4A0;
 }
 
 
 .menu{
     font-size: 20px;
+    font-weight: bold;
    
 }
 .menu a{
@@ -23,27 +25,108 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     margin-left: 5%;
     
 }
+
+
+/*product-list,card product css*/
+.list-title{
+    color: red;
+    font-weight: bold;
+}
 .product-list {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 20px;
 }
+
 .card {
     width: 300px; 
     border: 1px solid #ccc;
     border-radius: 8px;
     overflow: hidden;
     margin: 10px;
-    
+    background: #FFA62B;
 }
 
 .card-img {
-    width: 100%;
-    height: auto;
+    margin-left:2.5%;
+    margin-top:5px;
+    width: 95%;
+    height: 285px;
     display: block;
-    object-fit: cover;
+    object-fit: contain;
+    border-radius:5px;
 }
 .card-body{
-    margin-left: 5px;
+    margin-left: 5%;
+}
+
+
+/*footer css*/
+.footer {
+    background-color: #2c3e50;
+    color: #ecf0f1;
+    padding: 30px 0 15px;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+
+.footer-comment,
+.footer-links,
+.footer-contact {
+    flex: 1 1 250px;
+    margin: 10px;
+}
+
+.footer-comment h3,
+.footer-links h4,
+.footer-contact h4 {
+    margin-bottom: 15px;
+    font-weight: bold;
+    color: #f39c12;
+}
+
+.footer-comment p,
+.footer-links ul,
+.footer-links li,
+.footer-contact p {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    color: #bdc3c7;
+}
+
+.footer-links ul {
+    padding-left: 0;
+}
+
+.footer-links ul li {
+    margin-bottom: 10px;
+}
+
+.footer-links ul li a {
+    color: #bdc3c7;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-links ul li a:hover {
+    color: #f39c12;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 15px;
+    border-top: 1px solid #34495e;
+    color: #7f8c8d;
+    font-size: 13px;
 }
