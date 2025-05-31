@@ -10,24 +10,26 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-        <link href="../CSS/home.css" rel="stylesheet" type="text/css"/>
+        <link href="${pageContext.request.contextPath}/CSS/home.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
         <div class="header">
-            
+
             <h2 class="shop_name">Healthy Food</h2>
             <nav class="menu">
-                <a href="home.jsp">Home</a>
-                <a href="login.jspd">Login</a>
+                <a href="${pageContext.request.contextPath}/home">Home</a>
+                <a href="login.jsp">Login</a>
                 <a href="cart.jsp">Cart</a>
-                
-                <input type="submit" value="Search"></a>
-                <input type="text">
-                
-                
+
+                <form action="search" method="get">                   
+                    <input type="image" src="${pageContext.request.contextPath}/icons/search_icon.png" alt="Search" width="20" height="20">
+                    <input type="text" name="keyword" placeholder="Search...">
+                </form>
+
+
             </nav>
         </div>
 
-    
+
     </body>
 </html>

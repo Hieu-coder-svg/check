@@ -21,4 +21,29 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     color: #F3F2F3;
     text-decoration: none;
     margin-left: 5%;
+    
+}
+.product-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+.card {
+    width: 300px; 
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 10px;
+    
+}
+
+.card-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+}
+.card-body{
+    margin-left: 5px;
 }

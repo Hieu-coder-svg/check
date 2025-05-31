@@ -18,7 +18,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>HomeDisplayServlet</servlet-name>
-        <url-pattern>/HomeDisplayServlet</url-pattern>
+        <url-pattern>/home</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ProductDetailServlet</servlet-name>
