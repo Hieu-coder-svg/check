@@ -20,6 +20,10 @@
         <servlet-name>DisplayAccountServlet</servlet-name>
         <servlet-class>controller.DisplayAccountServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DeleteUserServlet</servlet-name>
+        <servlet-class>controller.DeleteUserServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeDisplayServlet</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -39,5 +43,9 @@
     <servlet-mapping>
         <servlet-name>DisplayAccountServlet</servlet-name>
         <url-pattern>/DisplayAccount</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteUserServlet</servlet-name>
+        <url-pattern>/DeleteUser</url-pattern>
     </servlet-mapping>
 </web-app>

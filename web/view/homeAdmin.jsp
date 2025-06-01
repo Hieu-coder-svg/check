@@ -33,29 +33,27 @@
     <body>
         <div>
             <h2>Role List</h2>
-            <form>
-                <table border="1">
-                    <thead>
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>Role ID</th>
+                        <th>Role Name</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <c:forEach items="${listRole}" var="p">
                         <tr>
-                            <th>Role ID</th>
-                            <th>Role Name</th>
-                            <th>Link</th>
+                            <td>${p.id}</td>
+                            <td>${p.roleName}</td>
+                            <td>
+                                <button onclick="location.href = 'DisplayAccount?idRole=${p.id}'">Display Accounts</button>
+                            </td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        <c:forEach items="${listRole}" var="p">
-                            <tr>
-                                <td>${p.id}</td>
-                                <td>${p.roleName}</td>
-                                <td><button onclick="location.href='HomeAdmin'">${p.roleName}</button></td>
-                                <td>
-                               
-                                </td>
-                            </tr>
-                        </c:forEach>
-                    </tbody>
-                </table>
-            </form>
+                    </c:forEach>
+                </tbody>
+            </table>
+            <button onclick="location.href = 'AddRole'">Add New Role</button>
         </div>
     </body>
 </html>

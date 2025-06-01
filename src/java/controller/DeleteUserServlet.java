@@ -4,24 +4,19 @@
  */
 package controller;
 
-import dal.DAORole;
 import dal.DAOUser;
-import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import java.util.ArrayList;
-import model.Role;
 
 /**
  *
  * @author Cuong
  */
-public class HomeAdminServlet extends HttpServlet {
+public class DeleteUserServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,42 +35,48 @@ public class HomeAdminServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet HomeAdminServlet</title>");
+            out.println("<title>Servlet DeleteUserServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet HomeAdminServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet DeleteUserServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+  
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        HttpSession session = request.getSession(false);
-//        if (session == null || !"admin".equals(session.getAttribute("userRole"))) {
-//            response.sendRedirect("login");
-//            return;
-//        }
-        ArrayList<Role> listRole = DAORole.INSTANCE.getAllRoles();
-        request.setAttribute("listRole", listRole);
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("view/homeAdmin.jsp");
-        requestDispatcher.forward(request, response);
+        try {
+            String userId = request.getParameter("id");
+            if (userId == null || userId.trim().isEmpty()) {
+                request.setAttribute("error", "User ID is missing");
+                request.getRequestDispatcher("view/error.jsp").forward(request, response);
+                return;
+            }
+            int id = Integer.parseInt(userId);
+            boolean deleted = DAOUser.INSTANCE.deleteUserById(id);
+            if (deleted) {
+                response.sendRedirect("DisplayAccount?idRole=" + request.getParameter("roleId"));
+            } else {
+                request.setAttribute("error", "Failed to delete user: " + DAOUser.INSTANCE.getStatus());
+                request.getRequestDispatcher("view/error.jsp").forward(request, response);
+            }
+        } catch (NumberFormatException e) {
+            request.setAttribute("error", "Invalid User ID");
+            request.getRequestDispatcher("view/error.jsp").forward(request, response);
+        } catch (Exception e) {
+            request.setAttribute("error", "Error: " + e.getMessage());
+            request.getRequestDispatcher("view/error.jsp").forward(request, response);
+        }
     }
+
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        processRequest(request, response);
     }
 
     @Override

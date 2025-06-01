@@ -27,14 +27,11 @@ public class DAORole {
             INSTANCE = this;
         }
     }
+
     public ArrayList<Role> getAllRoles() {
         ArrayList<Role> roles = new ArrayList<>();
         String query = "SELECT id, role_name FROM Role";
-        
-        try {
-            PreparedStatement ps = con.prepareStatement(query);
-            ResultSet rs = ps.executeQuery();
-            
+        try (PreparedStatement ps = con.prepareStatement(query); ResultSet rs = ps.executeQuery()) {
             while (rs.next()) {
                 Role role = new Role();
                 role.setId(rs.getInt("id"));
@@ -45,13 +42,13 @@ public class DAORole {
             e.printStackTrace();
             status = "Error: Unable to retrieve roles - " + e.getMessage();
         }
-        
         return roles;
     }
+
     public static void main(String[] args) {
         ArrayList<Role> n = DAORole.INSTANCE.getAllRoles();
         for (int i = 0; i < n.size(); i++) {
-            System.out.println(n.get(i).getId()+n.get(i).getRoleName());
+            System.out.println(n.get(i).getId() + n.get(i).getRoleName());
         }
     }
 
