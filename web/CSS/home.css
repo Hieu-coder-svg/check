@@ -8,16 +8,25 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
 */
 /*header css*/
 .header{
-    background-color: #2c3e50;
+/*    background-color: #2c3e50;*/
     text-align: center;
+    background-image: url('../images/background_header2.jpg');
+    background-size: cover; /* đảm bảo ảnh bao phủ toàn bộ header */
+    background-position: center; /* căn giữa ảnh */
+    background-repeat: no-repeat;
     color:#A8E4A0;
+    padding-bottom: 2%;
+    padding-top:1%;
+    border-bottom: 5px solid;
+    
 }
+
 
 
 .menu{
     font-size: 20px;
     font-weight: bold
-   
+    
 }
 .menu a{
     color: #F3F2F3;
@@ -44,7 +53,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
 }
 
 .card {
-    width: 300px; 
+    width: 200px; 
     border: 1px solid #ccc;
     border-radius: 8px;
     overflow: hidden;
@@ -56,13 +65,14 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     margin-left:2.5%;
     margin-top:5px;
     width: 95%;
-    height: 285px;
+    height: auto;
     display: block;
     object-fit: contain;
     border-radius:5px;
 }
 .card-body{
     margin-left: 5%;
+    margin-right:2%;
 }
 
 
@@ -133,4 +143,16 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     border-top: 1px solid #34495e;
     color: #7f8c8d;
     font-size: 13px;
+}
+/*Main content css*/
+.content-main{
+    display:flex;
+    gap:5px;
+    width:100%;
+}
+.content-left{
+    width:25%;
+}
+.content-right{
+    width:75%;
 }

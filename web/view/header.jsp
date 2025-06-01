@@ -14,7 +14,7 @@
     </head>
     <body>
         <div class="header">
-
+            
             <h2 class="shop_name">Healthy Food</h2>
             <nav class="menu">
                 <a href="${pageContext.request.contextPath}/home">Home</a>
