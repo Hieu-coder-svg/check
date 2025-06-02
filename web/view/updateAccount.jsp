@@ -1,4 +1,3 @@
-```jsp
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -126,6 +125,7 @@
                 <div class="form-group">
                     <label>Role (Read-only):</label>
                     <input type="text" class="read-only" value="${user.role.roleName}" readonly>
+                    <input type="hidden" name="roleId" value="${user.role.id}">
                 </div>
                 <div>
                     <button type="submit" class="btn btn-submit">Update</button>
@@ -135,4 +135,3 @@
         </div>
     </body>
 </html>
-```

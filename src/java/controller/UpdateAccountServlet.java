@@ -6,11 +6,11 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import model.User;
 import model.Role;
 
@@ -18,6 +18,12 @@ public class UpdateAccountServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+//        HttpSession session = request.getSession(false);
+//        if (session == null || !"admin".equals(session.getAttribute("userRole"))) {
+//            response.sendRedirect("login");
+//            return;
+//        }
+
         try {
             String userId = request.getParameter("id");
             if (userId == null || userId.trim().isEmpty()) {
@@ -27,14 +33,7 @@ public class UpdateAccountServlet extends HttpServlet {
             }
             int id = Integer.parseInt(userId);
             DAOUser daoUser = DAOUser.INSTANCE;
-            ArrayList<User> userList = daoUser.getUser();
-            User user = null;
-            for (User u : userList) {
-                if (u.getId() == id) {
-                    user = u;
-                    break;
-                }
-            }
+            User user = daoUser.getUserById(id);
             if (user == null) {
                 request.setAttribute("error", "User not found");
                 request.getRequestDispatcher("view/error.jsp").forward(request, response);
@@ -55,15 +54,21 @@ public class UpdateAccountServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession(false);
+//        if (session == null || !"admin".equals(session.getAttribute("userRole"))) {
+//            response.sendRedirect("login");
+//            return;
+//        }
+
         try {
             String userId = request.getParameter("id");
             if (userId == null || userId.trim().isEmpty()) {
                 request.setAttribute("error", "User ID is missing");
-                request.getRequestDispatcher("view/error.jsp").forward(request, response);
+                request.getRequestDispatcher("view/updateAccount.jsp").forward(request, response);
                 return;
             }
             int id = Integer.parseInt(userId);
-            
+
             String name = request.getParameter("name");
             String email = request.getParameter("email");
             String password = request.getParameter("password");
@@ -73,14 +78,14 @@ public class UpdateAccountServlet extends HttpServlet {
             String genderStr = request.getParameter("gender");
             String roleIdStr = request.getParameter("roleId");
 
-            // Validate required fields
             if (email == null || email.trim().isEmpty()) {
                 request.setAttribute("error", "Email is required");
                 request.getRequestDispatcher("view/updateAccount.jsp").forward(request, response);
                 return;
             }
 
-            // Parse and validate data
+            DAOUser daoUser = DAOUser.INSTANCE;
+            
             Date dob = null;
             if (dobStr != null && !dobStr.trim().isEmpty()) {
                 try {
@@ -106,7 +111,6 @@ public class UpdateAccountServlet extends HttpServlet {
                 }
             }
 
-            // Create User object
             User user = new User();
             user.setId(id);
             user.setName(name);
@@ -120,12 +124,14 @@ public class UpdateAccountServlet extends HttpServlet {
             role.setId(roleId);
             user.setRole(role);
 
-            // Update user in database
-            DAOUser daoUser = DAOUser.INSTANCE;
+            System.out.println("Updating user ID: " + id);
+            System.out.println("Email: " + email);
+            System.out.println("Role ID: " + roleId);
             boolean updated = daoUser.updateUser(user);
             if (updated) {
                 response.sendRedirect("DisplayAccount?idRole=" + roleId);
             } else {
+                System.err.println("Update failed: " + daoUser.getStatus());
                 request.setAttribute("error", "Failed to update user: " + daoUser.getStatus());
                 request.getRequestDispatcher("view/updateAccount.jsp").forward(request, response);
             }
