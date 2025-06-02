@@ -57,12 +57,12 @@ public class DAOProduct {
         return productList;
 
     }
-    public  static Product getProductById(int tourId) {
+    public  static Product getProductById(int productId) {
         Product product = null;
         try {
-            String sql = "SELECT * FROM Tours WHERE TourID = ?";
+            String sql = "SELECT * FROM Product WHERE id = ?";
             PreparedStatement statement = con.prepareStatement(sql);
-            statement.setInt(1, tourId);
+            statement.setInt(1, productId);
             ResultSet rs = statement.executeQuery();
 
             if (rs.next()) {
