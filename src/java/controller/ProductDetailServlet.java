@@ -1,11 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 
 package controller;
-
-
 import dal.DAOOrder;
 import dal.DAOProduct;
 import java.io.IOException;
@@ -69,13 +63,15 @@ public class ProductDetailServlet extends HttpServlet {
             request.getRequestDispatcher("productDetail.jsp").forward(request, response);
             return;
         }
-        Product product = DAOProduct.getProductById(productId);
+        DAOProduct dao = new DAOProduct();
+        Product product = dao.getProductById(productId);
         String productName = product.getName() ;
         String description = product.getDescription();
         Double price = product.getPrice();
         int stock = product.getStock();
-         String img = product.getImgUrl();
-         double shelfLifeHours = product.getShelfLifeHours();
+        String img = product.getImgUrl();
+        double shelfLifeHours = product.getShelfLifeHours();
+        String category = product.getCategory().getName();
         
         request.setAttribute("productId", product.getId());
         request.setAttribute("productName", productName);
@@ -84,7 +80,7 @@ public class ProductDetailServlet extends HttpServlet {
         request.setAttribute("stock", stock);
         request.setAttribute("img", img);
         request.setAttribute("time", shelfLifeHours);
-      
+        request.setAttribute("category", category);
         request.getRequestDispatcher("productDetail.jsp").forward(request, response);
         
     } 
@@ -99,18 +95,12 @@ public class ProductDetailServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-         String productIdStr = request.getParameter("productId");
-        if (productIdStr == null || productIdStr.isEmpty()) {
-            request.setAttribute("error", "Product ID is missing.");
-            request.getRequestDispatcher("booking.jsp").forward(request, response);
-            return;
-        }
-
+         String productIdStr = request.getParameter("productId");      
         int productId;
         try {
             productId = Integer.parseInt(productIdStr);
         } catch (NumberFormatException e) {
-            request.setAttribute("error", "Invalid Tour ID.");
+            request.setAttribute("error", "Invalid product id.");
             request.getRequestDispatcher("productDetail.jsp").forward(request, response);
             return;
         }
@@ -127,10 +117,8 @@ public class ProductDetailServlet extends HttpServlet {
             request.setAttribute("error", "Invalid number.");
             request.getRequestDispatcher("productDetail.jsp").forward(request, response);
             return;
-        }
-
-        Product product = DAOProduct.getProductById(productId);
-        
+        }       
+      
 
 //        boolean success = DAOOrder.orderProduct(user.getId(), productId, numberOfPeople, totalPrice);
 //        if (success) {

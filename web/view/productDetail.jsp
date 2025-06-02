@@ -4,7 +4,10 @@
 <html>
    
     <body>
-         <a href="${pageContext.request.contextPath}/view/home.jsp" class="back-link">Home</a>
+        <%      
+            String category = (String) request.getAttribute("category");
+    %>
+         <a href="${pageContext.request.contextPath}/view/home" class="back-link">Home</a>
           <a href="${pageContext.request.contextPath}/view/product/vegetable.jsp" class="back-link">Vegetable</a>
     </body>
       <div class="">
@@ -14,16 +17,16 @@
             String description = (String) request.getAttribute("description");
             Integer stock = (Integer) request.getAttribute("stock");
             Double price = (Double) request.getAttribute("price");     
-            Integer time = (Integer) request.getAttribute("time")
-            String img = (String) request.getAttribute("img")
+            Integer time = (Integer) request.getAttribute("time");
+            String img = (String) request.getAttribute("img");
     %>
         <div class="">
-            <h3><%= ProductName %></h3>  
+            <h3><%= productName %></h3>  
             <img src="<%= img %>" alt="alt"/> 
             <p>Price: <%= price %></p>
-            <p><%= stock %></p>
+            <p>Stock: <%= stock %></p>
             <p>Description: <%= description %></p>
-            <p><%= time %></p>  
+            <p>Shelf Life Hours: <%= time %></p>  
         </div>
         <div>
             <input type="button" value="-">

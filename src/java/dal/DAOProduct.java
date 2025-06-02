@@ -57,10 +57,12 @@ public class DAOProduct {
         return productList;
 
     }
-    public  static Product getProductById(int productId) {
+    public  Product getProductById(int productId) {
         Product product = null;
         try {
-            String sql = "SELECT * FROM Product WHERE id = ?";
+            String sql = "SELECT * "
+                    + "FROM Product p"
+                    + "INNER JOIN Category c on c.id = p.category_id WHERE id = ?";
             PreparedStatement statement = con.prepareStatement(sql);
             statement.setInt(1, productId);
             ResultSet rs = statement.executeQuery();
@@ -74,6 +76,12 @@ public class DAOProduct {
                 p.setStock(rs.getInt("stock"));
                 p.setImgUrl(rs.getString("image_url"));
                 p.setShelfLifeHours(0);         
+                
+                Category c = new Category();
+                c.setId(rs.getInt("category_id"));
+                c.setName(rs.getString("category_name"));
+                
+                p.setCategory(c);                         
             }
 
             rs.close();
