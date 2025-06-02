@@ -201,6 +201,40 @@ public class DAOUser {
         return status;
     }
 
+    public boolean updateUser(User user) {
+        String sql = "UPDATE Users SET name = ?, email = ?, password = ?, phone = ?, dob = ?, address = ?, gender = ?, role_id = ? WHERE id = ?";
+        try {
+            if (con == null) {
+                status = "Error: Database connection is null";
+                return false;
+            }
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, user.getName());
+            ps.setString(2, user.getEmail());
+            ps.setString(3, user.getPassword());
+            ps.setString(4, user.getPhone());
+            ps.setDate(5, user.getDob());
+            ps.setString(6, user.getAddress());
+            ps.setBoolean(7, user.isGender());
+            ps.setInt(8, user.getRole().getId());
+            ps.setInt(9, user.getId());
+
+            int rowsAffected = ps.executeUpdate();
+            ps.close();
+            if (rowsAffected > 0) {
+                status = "OK: User with ID " + user.getId() + " updated successfully";
+                return true;
+            } else {
+                status = "Error: No user found with ID " + user.getId();
+                return false;
+            }
+        } catch (SQLException e) {
+            status = "Error at updateUser: " + e.getMessage();
+            System.err.println(status);
+            return false;
+        }
+    }
+
     public static void main(String[] args) {
         ArrayList<User> ulist = DAOUser.INSTANCE.getUsersByRoleId(6);
         for (int i = 0; i < ulist.size(); i++) {

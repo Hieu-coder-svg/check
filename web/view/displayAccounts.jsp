@@ -84,7 +84,7 @@
                                 <td>${user.name}</td>
                                 <td>${user.email}</td>
                                 <td>
-                                    <a href="UpdateUser?id=${user.id}" class="btn">Update</a>
+                                    <a href="UpdateAccount?id=${user.id}" class="btn">Update</a>
                                 </td>
                                 <td>
                                     <a href="DeleteUser?id=${user.id}&roleId=${roleId}" 
