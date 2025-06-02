@@ -1,38 +1,89 @@
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-   
-    <body>
-        <%      
-            String category = (String) request.getAttribute("category");
-    %>
-         <a href="${pageContext.request.contextPath}/view/home" class="back-link">Home</a>
-          <a href="${pageContext.request.contextPath}/view/product/vegetable.jsp" class="back-link">Vegetable</a>
-    </body>  
-      <div class="">
-            <%
-            Integer productId = (Integer) request.getAttribute("tourId");
-            String productName = (String) request.getAttribute("tourName");       
-            String description = (String) request.getAttribute("description");
-            Integer stock = (Integer) request.getAttribute("stock");
-            Double price = (Double) request.getAttribute("price");     
-            Integer time = (Integer) request.getAttribute("time");
-            String img = (String) request.getAttribute("img");
-    %>
-        <div class="">
-            <h3><%= productName %></h3>  
-            <img src="<%= img %>" alt="alt"/> 
-            <p>Price: <%= price %></p>
-            <p>Stock: <%= stock %></p>
-            <p>Description: <%= description %></p>
-            <p>Shelf Life Hours: <%= time %></p>  
+<head>
+    <title>Product Detail</title>
+    <meta charset="UTF-8">
+    <style>
+        .container { max-width: 800px; margin: 0 auto; padding: 20px; }
+        .back-links { margin-bottom: 20px; }
+        .back-link { margin-right: 10px; text-decoration: none; color: #333; }
+        .product-details { display: flex; gap: 20px; }
+        .product-img { max-width: 300px; }
+        .quantity-controls { margin: 20px 0; }
+        .quantity-controls input[type="text"] { width: 50px; text-align: center; }
+        .error { color: red; }
+        .success { color: green; }
+    </style>
+</head>
+<body>
+     <% 
+                Integer productId = (Integer) request.getAttribute("productId");
+                String productName = (String) request.getAttribute("productName");
+                String description = (String) request.getAttribute("description");
+                Integer stock = (Integer) request.getAttribute("stock");
+                Double price = (Double) request.getAttribute("price");
+                Double shelfLifeHours = (Double) request.getAttribute("time");
+                String img = (String) request.getAttribute("img");
+                String categoryName = (String) request.getAttribute("categoryName");
+                Integer categoryId = (Integer) request.getAttribute("categoryId");
+                %>
+    <div class="container">
+        <div class="back-links">
+            <a href="${pageContext.request.contextPath}/view/home" class="back-link">Home</a>
+            <a href="${pageContext.request.contextPath}/view/${pageContext.request.contextPath}/category?categotyId=<%= categoryId %>" class="back-link"><%= categoryName %></a>
         </div>
-        <div>
-            <input type="button" value="-">
-            <input type="text" name="name" value="1">
-            <input type="button" value="+">
-        </div> 
 
+        <% 
+            String error = (String) request.getAttribute("error");
+            String message = (String) request.getAttribute("message");
+            if (error != null) {
+        %>
+            <p class="error"><%= error %></p>
+        <% } else if (message != null) { %>
+            <p class="success"><%= message %></p>
+        <% } %>
+
+        <div class="product-details">
+            <%           
+                if (productId != null) {
+            %>
+            <div>
+                <img src="<%= img %>" alt="<%= productName %>" class="product-img"/>
+            </div>
+            <div>
+                <h3><%= productName %></h3>
+                <p>Category: <%= categoryName %></p>
+                <p>Price: $<%= String.format("%.2f", price) %></p>
+                <p>Stock: <%= stock %></p>
+                <p>Description: <%= description %></p>
+                <p>Shelf Life: <%= shelfLifeHours %> hours</p>
+
+                <form action="${pageContext.request.contextPath}/productDetail" method="post">
+                    <input type="hidden" name="productId" value="<%= productId %>">
+                    <div class="quantity-controls">
+                        <button type="button" onclick="updateQuantity(-1)">-</button>
+                        <input type="text" name="number" id="quantity" value="1" readonly>
+                        <button type="button" onclick="updateQuantity(1)">+</button>
+                    </div>
+                    <button type="submit">Add to Cart</button>
+                </form>
+            </div>
+            <% } else { %>
+                <p class="error">Product not found.</p>
+            <% } %>
         </div>
+    </div>
+
+    <script>
+        function updateQuantity(change) {
+            let quantityInput = document.getElementById('quantity');
+            let currentQuantity = parseInt(quantityInput.value);
+            let newQuantity = currentQuantity + change;
+            if (newQuantity >= 1 && newQuantity <= <%= stock %>) {
+                quantityInput.value = newQuantity;
+            }
+        }
+    </script>
+</body>
 </html>

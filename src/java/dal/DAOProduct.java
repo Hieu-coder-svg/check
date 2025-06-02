@@ -96,31 +96,30 @@ public class DAOProduct {
     }
     
     
-    public  Product getProductById(int productId) {
+   public  Product getProductById(int productId) {
         Product product = null;
         try {
-            String sql = "SELECT * "
-                    + "FROM Product p"
-                    + "INNER JOIN Category c on c.id = p.category_id WHERE id = ?";
+            String sql = "SELECT p.id, p.name, p.description, p.price, p.stock, p.image_url, p.shelf_life_hours,c.id AS category_id, c.name AS category_name " +
+                     "FROM Product p JOIN Category c ON p.category_id = c.id WHERE p.id = ?";
             PreparedStatement statement = con.prepareStatement(sql);
             statement.setInt(1, productId);
             ResultSet rs = statement.executeQuery();
-
             if (rs.next()) {
-                 Product p = new Product();
-                p.setId(rs.getInt("id"));
-                p.setName(rs.getString("name"));
-                p.setDescription(rs.getString("description"));
-                p.setPrice(rs.getDouble("price"));
-                p.setStock(rs.getInt("stock"));
-                p.setImgUrl(rs.getString("image_url"));
-                p.setShelfLifeHours(0);         
+                product = new Product();
+                product.setId(rs.getInt("id"));
+                product.setName(rs.getString("name"));
+                product.setDescription(rs.getString("description"));
+                product.setPrice(rs.getDouble("price"));
+                product.setStock(rs.getInt("stock"));
+                product.setImgUrl(rs.getString("image_url"));
+                product.setShelfLifeHours(0);         
                 
                 Category c = new Category();
                 c.setId(rs.getInt("category_id"));
                 c.setName(rs.getString("category_name"));
                 
-                p.setCategory(c);                         
+                product.setCategory(c);        
+              
             }
 
             rs.close();

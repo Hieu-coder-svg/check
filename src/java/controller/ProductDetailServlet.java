@@ -8,10 +8,6 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 import model.Product;
 
 /**
@@ -55,33 +51,34 @@ public class ProductDetailServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-           String productIdStr = request.getParameter("productIdStr");
+         String productIdStr = request.getParameter("productId");
         int productId;
         try {
             productId = Integer.parseInt(productIdStr);
         } catch (NumberFormatException e) {
-            request.getRequestDispatcher("productDetail.jsp").forward(request, response);
+            request.setAttribute("error", "Invalid product ID.");
+            request.getRequestDispatcher("view/productDetail.jsp").forward(request, response);
             return;
         }
+
         DAOProduct dao = new DAOProduct();
-        Product product = dao.getProductById(productId);
-        String productName = product.getName() ;
-        String description = product.getDescription();
-        Double price = product.getPrice();
-        int stock = product.getStock();
-        String img = product.getImgUrl();
-        double shelfLifeHours = product.getShelfLifeHours();
-        String category = product.getCategory().getName();
-        
+        Product product = dao.getProductById(productId); 
+        if (product == null) {
+            request.setAttribute("error", "Product not found.");
+            request.getRequestDispatcher("view/productDetail.jsp").forward(request, response);
+            return;
+        }
+
         request.setAttribute("productId", product.getId());
-        request.setAttribute("productName", productName);
-        request.setAttribute("description", description);
-        request.setAttribute("price", price);
-        request.setAttribute("stock", stock);
-        request.setAttribute("img", img);
-        request.setAttribute("time", shelfLifeHours);
-        request.setAttribute("category", category);
-        request.getRequestDispatcher("productDetail.jsp").forward(request, response);
+        request.setAttribute("productName", product.getName());
+        request.setAttribute("description", product.getDescription());
+        request.setAttribute("price", product.getPrice());
+        request.setAttribute("stock", product.getStock());
+        request.setAttribute("img", product.getImgUrl());
+        request.setAttribute("time", product.getShelfLifeHours());
+        request.setAttribute("categoryName", product.getCategory().getName());
+        request.setAttribute("categoryId", product.getCategory().getId());
+        request.getRequestDispatcher("view/productDetail.jsp").forward(request, response);
         
     } 
 
@@ -95,17 +92,15 @@ public class ProductDetailServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-         String productIdStr = request.getParameter("productId");      
+       String productIdStr = request.getParameter("productId");
         int productId;
         try {
             productId = Integer.parseInt(productIdStr);
         } catch (NumberFormatException e) {
-            request.setAttribute("error", "Invalid product id.");
-            request.getRequestDispatcher("productDetail.jsp").forward(request, response);
+            request.setAttribute("error", "Invalid product ID.");
+            doGet(request, response); // Re-fetch product details
             return;
         }
-
-  
         String numberStr = request.getParameter("number");
         int number;
         try {
@@ -114,20 +109,36 @@ public class ProductDetailServlet extends HttpServlet {
                 throw new NumberFormatException("Number must be greater than 0.");
             }
         } catch (NumberFormatException e) {
-            request.setAttribute("error", "Invalid number.");
-            request.getRequestDispatcher("productDetail.jsp").forward(request, response);
+            request.setAttribute("error", "Invalid quantity.");
+            doGet(request, response); // Re-fetch product details
             return;
-        }       
-      
+        }
 
-//        boolean success = DAOOrder.orderProduct(user.getId(), productId, numberOfPeople, totalPrice);
+        DAOProduct dao = new DAOProduct();
+        Product product = dao.getProductById(productId);
+        
+        if (product == null) {
+            request.setAttribute("error", "Product not found.");
+            doGet(request, response);
+            return;
+        }
+
+        if (number > product.getStock()) {
+            request.setAttribute("error", "Requested quantity exceeds available stock.");
+            doGet(request, response);
+            return;
+        }
+        double totalPrice = number * product.getPrice();
+        DAOOrder daoOrder = new DAOOrder();
+//        boolean success = daoOrder.orderProduct(user.getId(), productId, number, totalPrice);
+//        
 //        if (success) {
-//            request.setAttribute("message", "Booking successful!");
+//            request.setAttribute("message", "Product added to cart successfully!");
 //        } else {
-//            request.setAttribute("error", "Failed to book the product. Please try again.");
+//            request.setAttribute("error", "Failed to add product to cart. Please try again.");
 //        }
 
-        request.getRequestDispatcher("productDetail.jsp").forward(request, response);
+        request.getRequestDispatcher("view/productDetail.jsp").forward(request, response);
     }
 
     /** 
