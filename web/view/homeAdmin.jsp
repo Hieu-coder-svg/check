@@ -70,32 +70,32 @@
             </div>
         </div>
         <div class="welcome">
-            <img src="https://via.placeholder.com/100" alt="Admin Avatar" onclick="location.href='DisplayAccount?idRole=1'">
+            <img src="images/admin.jpg" alt="Admin Avatar" onclick="location.href='DisplayAccount?idRole=1'">
             <h2>Welcome "Admin 1"</h2>
         </div>
         <div class="dashboard">
             <div class="card" onclick="location.href='DisplayAccount?idRole=1'">
-                <img src="https://via.placeholder.com/50?text=System+Admin" alt="System Admin">
+                <img src="images/systemadmin.jpg" alt="System Admin">
                 <h3>System Admin</h3>
             </div>
             <div class="card" onclick="location.href='DisplayAccount?idRole=2'">
-                <img src="https://via.placeholder.com/50?text=Manager" alt="Manager">
+                <img src="images/managershop.jpg" alt="Manager">
                 <h3>Manager</h3>
             </div>
             <div class="card" onclick="location.href='DisplayAccount?idRole=3'">
-                <img src="https://via.placeholder.com/50?text=Customer" alt="Customer">
+                <img src="images/customer.jpg" alt="Customer">
                 <h3>Customer</h3>
             </div>
             <div class="card" onclick="location.href='DisplayAccount?idRole=4'">
-                <img src="https://via.placeholder.com/50?text=Nutritionist" alt="Nutritionist">
+                <img src="images/nutritionist.jpg" alt="Nutritionist">
                 <h3>Nutritionist</h3>
             </div>
             <div class="card" onclick="location.href='DisplayAccount?idRole=5'">
-                <img src="https://via.placeholder.com/50?text=Seller" alt="Seller">
+                <img src="images/seller.jpg"  alt="Seller">
                 <h3>Seller</h3>
             </div>
             <div class="card" onclick="location.href='DisplayAccount?idRole=6'">
-                <img src="https://via.placeholder.com/50?text=Shipper" alt="Shipper">
+                <img src="images/shipper.jpg"  alt="Shipper">
                 <h3>Shipper</h3>
             </div>
         </div>
