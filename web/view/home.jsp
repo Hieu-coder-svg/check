@@ -33,12 +33,19 @@
                 <div class="content-right">
                     <div class="list-title">
                         <h2>Product List:</h2>
+                    <%  if(request.getAttribute("errorMessage")!=null){
+                        String em =(String)request.getAttribute("errorMessage"); 
+                    %>
+                        <h2><%= em%> </h2>
+                    <% 
+                        }    
+                    %>
                     </div>
 
                     <div class="product-list">                  
                         <c:forEach items="${requestScope.productList}" var="o">
                             <div class="card">
-                                <a href="${pageContext.request.contextPath}/productDetail?productId=${o.id}>">
+                                <a href="${pageContext.request.contextPath}/productDetail?productId=${o.id}">
                                 <img class="card-img" src="${o.imgUrl}" alt="Product Image">
                                 </a>
                                 <div class="card-body">

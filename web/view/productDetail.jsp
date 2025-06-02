@@ -9,7 +9,7 @@
     %>
          <a href="${pageContext.request.contextPath}/view/home" class="back-link">Home</a>
           <a href="${pageContext.request.contextPath}/view/product/vegetable.jsp" class="back-link">Vegetable</a>
-    </body>
+    </body>  
       <div class="">
             <%
             Integer productId = (Integer) request.getAttribute("tourId");

@@ -5,12 +5,15 @@
 
 package controller;
 
+import dal.DAOProduct;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.List;
+import model.Product;
 
 /**
  *
@@ -53,7 +56,20 @@ public class SearchServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-//        processRequest(request, response);
+         DAOProduct dao = new DAOProduct();
+         List<Product> searchList;
+         String searchName = request.getParameter("keyword");
+         searchList = dao.searchProduct(searchName);
+         if (searchList.isEmpty() || searchList==null){
+             String error = "Product Not Found";
+             request.setAttribute("errorMessage", error);
+             request.getRequestDispatcher("/view/home.jsp").forward(request, response);
+             return;
+         } 
+         request.setAttribute("productList", searchList);
+         request.getRequestDispatcher("/view/home.jsp").forward(request, response);
+         
+         
     } 
 
     /** 
