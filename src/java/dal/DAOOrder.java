@@ -5,6 +5,7 @@
 package dal;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
 /**
  *
@@ -12,7 +13,7 @@ import java.util.ArrayList;
  */
 public class DAOOrder {
     public static DAOOrder INSTANCE= new DAOOrder();
-    private Connection con;
+    private static Connection con;
     private String status="OK";
 
     public DAOOrder() {
@@ -21,4 +22,5 @@ public class DAOOrder {
         }else
             INSTANCE = this;
     }
+    
 }

@@ -5,23 +5,18 @@
 
 package controller;
 
-import dal.DAOProduct;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-import model.Product;
 
 /**
  *
  * @author ASUS
  */
-public class HomeDisplayServlet extends HttpServlet {
+public class SearchServlet extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -38,10 +33,10 @@ public class HomeDisplayServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet HomeDisplayServelet</title>");  
+            out.println("<title>Servlet SearchServlet</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet HomeDisplayServelet at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet SearchServlet at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -58,12 +53,7 @@ public class HomeDisplayServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        //processRequest(request, response);
-        DAOProduct dao = new DAOProduct();
-        List<Product> productList = dao.getAllProduct();
-        request.setAttribute("productList", productList);
-        request.getRequestDispatcher("/view/home.jsp").forward(request, response);
-        
+//        processRequest(request, response);
     } 
 
     /** 

@@ -38,7 +38,9 @@
                     <div class="product-list">                  
                         <c:forEach items="${requestScope.productList}" var="o">
                             <div class="card">
+                                <a href="${pageContext.request.contextPath}/productDetail?productId=${o.id}>">
                                 <img class="card-img" src="${o.imgUrl}" alt="Product Image">
+                                </a>
                                 <div class="card-body">
                                     <p>Product: ${o.name}</p>
                                     

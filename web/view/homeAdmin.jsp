@@ -1,9 +1,3 @@
-<%-- 
-    Document   : homeAdmin
-    Created on : May 31, 2025, 9:24:58 AM
-    Author     : Cuong
---%>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -12,48 +6,98 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Admin - Role Management</title>
         <style>
-            table {
-                border-collapse: collapse;
-                width: 50%;
-                margin: 20px auto;
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
             }
-            th, td {
-                padding: 10px;
-                text-align: left;
+            .header {
+                background: linear-gradient(to right, #00BCD4, #00E676);
+                padding: 10px 20px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+            .header a {
+                color: white;
+                text-decoration: none;
+                font-size: 20px;
+            }
+            .header .user-info {
+                display: flex;
+                align-items: center;
+            }
+            .header .user-info span {
+                margin-right: 10px;
+                color: white;
+            }
+            .welcome {
+                text-align: center;
+                margin: 20px 0;
+            }
+            .welcome img {
+                border-radius: 50%;
+                width: 100px;
+                cursor: pointer;
+            }
+            .dashboard {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 20px;
+                max-width: 1000px;
+                margin: 0 auto;
+                padding: 20px;
+            }
+            .dashboard .card {
+                background: #f9f9f9;
                 border: 1px solid #ddd;
+                border-radius: 5px;
+                text-align: center;
+                padding: 20px;
+                cursor: pointer;
             }
-            th {
-                background-color: #f2f2f2;
-            }
-            tr:nth-child(even) {
-                background-color: #f9f9f9;
+            .dashboard .card img {
+                width: 50px;
             }
         </style>
     </head>
     <body>
-        <div>
-            <h2>Role List</h2>
-            <table border="1">
-                <thead>
-                    <tr>
-                        <th>Role ID</th>
-                        <th>Role Name</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <c:forEach items="${listRole}" var="p">
-                        <tr>
-                            <td>${p.id}</td>
-                            <td>${p.roleName}</td>
-                            <td>
-                                <button onclick="location.href = 'DisplayAccount?idRole=${p.id}'">Display Accounts</button>
-                            </td>
-                        </tr>
-                    </c:forEach>
-                </tbody>
-            </table>
-            <button onclick="location.href = 'AddRole'">Add New Role</button>
+        <div class="header">
+            <a href="#">EazyDeals</a>
+            <div class="user-info">
+                <span>Admin 1</span>
+                <a href="#">Logout</a>
+            </div>
+        </div>
+        <div class="welcome">
+            <img src="https://via.placeholder.com/100" alt="Admin Avatar" onclick="location.href='DisplayAccount?idRole=1'">
+            <h2>Welcome "Admin 1"</h2>
+        </div>
+        <div class="dashboard">
+            <div class="card" onclick="location.href='DisplayAccount?idRole=1'">
+                <img src="https://via.placeholder.com/50?text=System+Admin" alt="System Admin">
+                <h3>System Admin</h3>
+            </div>
+            <div class="card" onclick="location.href='DisplayAccount?idRole=2'">
+                <img src="https://via.placeholder.com/50?text=Manager" alt="Manager">
+                <h3>Manager</h3>
+            </div>
+            <div class="card" onclick="location.href='DisplayAccount?idRole=3'">
+                <img src="https://via.placeholder.com/50?text=Customer" alt="Customer">
+                <h3>Customer</h3>
+            </div>
+            <div class="card" onclick="location.href='DisplayAccount?idRole=4'">
+                <img src="https://via.placeholder.com/50?text=Nutritionist" alt="Nutritionist">
+                <h3>Nutritionist</h3>
+            </div>
+            <div class="card" onclick="location.href='DisplayAccount?idRole=5'">
+                <img src="https://via.placeholder.com/50?text=Seller" alt="Seller">
+                <h3>Seller</h3>
+            </div>
+            <div class="card" onclick="location.href='DisplayAccount?idRole=6'">
+                <img src="https://via.placeholder.com/50?text=Shipper" alt="Shipper">
+                <h3>Shipper</h3>
+            </div>
         </div>
     </body>
 </html>
