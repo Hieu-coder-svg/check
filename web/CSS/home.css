@@ -22,7 +22,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
 }
 
 
-
+body{
+    background: #E2FEE5;
+}
 .menu{
     font-size: 20px;
     font-weight: bold
@@ -78,7 +80,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
 
 /*footer css*/
 .footer {
-    background-color: #2c3e50;
+    background-color: #A8FFB0;
     color: #ecf0f1;
     padding: 30px 0 15px;
     font-family: Arial, sans-serif;
@@ -116,7 +118,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     margin: 0;
     padding: 0;
     list-style: none;
-    color: #bdc3c7;
+    color: #628965;
 }
 
 .footer-links ul {
@@ -128,7 +130,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
 }
 
 .footer-links ul li a {
-    color: #bdc3c7;
+    color: #628965;
     text-decoration: none;
     transition: color 0.3s ease;
 }
@@ -151,8 +153,11 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     width:100%;
 }
 .content-left{
-    width:25%;
+    width:22%;
+    border: 1px solid;
 }
 .content-right{
     width:75%;
+    border:1px solid;
+    margin-left:3%;
 }
