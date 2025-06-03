@@ -9,6 +9,8 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import java.util.List;
 import model.Feedback;
 import model.Product;
 
@@ -70,13 +72,8 @@ public class ProductDetailServlet extends HttpServlet {
             request.getRequestDispatcher("view/productDetail.jsp").forward(request, response);
             return;
         }
-         DAOFeedback feed = new DAOFeedback();
-         Feedback feedback = feed.getFeedbackByProductId(productId); 
-        if (feedback == null) {
-            request.setAttribute("error", "Product not found.");
-            request.getRequestDispatcher("view/productDetail.jsp").forward(request, response);
-            return;
-        }
+        DAOFeedback feedbackDAO = new DAOFeedback();
+        List<Feedback> feedbackList = feedbackDAO.getFeedbackByProductId(productId);
 
         request.setAttribute("productId", product.getId());
         request.setAttribute("productName", product.getName());
@@ -87,11 +84,7 @@ public class ProductDetailServlet extends HttpServlet {
         request.setAttribute("time", product.getShelfLifeHours());
         request.setAttribute("categoryName", product.getCategory().getName());
         request.setAttribute("categoryId", product.getCategory().getId());
-        
-        request.setAttribute("userName", feedback.getUser().getName());
-        request.setAttribute("feedbackCreatedAt", feedback.getCreatedAt());
-        request.setAttribute("feedbackContent", feedback.getContent());
-        
+        request.setAttribute("feedbackList", feedbackList);
         request.getRequestDispatcher("view/productDetail.jsp").forward(request, response);
         
     } 
