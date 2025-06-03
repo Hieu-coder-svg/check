@@ -17,7 +17,7 @@
         }
         .sidebar {
             min-height: 100vh;
-            background-color: #4CAF50;
+            background-color: #00BCD4;
         }
         .sidebar a {
             color: #ffffff;
@@ -50,7 +50,7 @@
             <div class="col-md-9 py-4">
                 <div class="card mb-4">
                     <div class="card-header bg-success text-white">
-                        <i class="bi bi-truck"></i> Check Order
+                        <i class="bi bi-truck"></i> Order History
                     </div>
                     <div class="card-body">
                         <c:if test="${not empty orders}">

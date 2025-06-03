@@ -36,7 +36,7 @@
             <div class="col-md-9 py-4">
                 <div class="card mb-4 shadow-sm">
                     <div class="card-header bg-warning text-dark">
-                        <i class="bi bi-truck me-2"></i>Check Orders
+                        <i class="bi bi-truck me-2"></i>Order Status
                     </div>
                     <div class="card-body">
                         <c:if test="${not empty orders}">
