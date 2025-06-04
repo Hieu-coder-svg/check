@@ -23,11 +23,9 @@
                 border-radius: 15px;
                 box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
             }
-
             .back-links {
                 margin-bottom: 20px;
             }
-
             .back-link {
                 margin-right: 10px;
                 text-decoration: none;
