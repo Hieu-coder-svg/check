@@ -33,7 +33,7 @@
                 %>
     <div class="container">
         <div class="back-links">
-            <a href="${pageContext.request.contextPath}/view/home" class="back-link">Home</a>
+            <a href="${pageContext.request.contextPath}/home" class="back-link">Home</a>
             <a href="${pageContext.request.contextPath}/view/${pageContext.request.contextPath}/category?categotyId=<%= categoryId %>" class="back-link"><%= categoryName %></a>
         </div>
 
