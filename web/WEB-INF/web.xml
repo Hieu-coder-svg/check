@@ -81,7 +81,6 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>PriceFilterServlet</servlet-name>
-        <url-pattern>/pricefilter</url-pattern>
-        
+        <url-pattern>/pricefilter</url-pattern>       
     </servlet-mapping>
 </web-app>
