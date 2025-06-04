@@ -1,7 +1,4 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ page import="model.*" %>
-<%@ page import="java.sql.Timestamp, java.util.*, java.text.*" %>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,8 +30,8 @@
                 %>
     <div class="container">
         <div class="back-links">
-            <a href="${pageContext.request.contextPath}/home" class="back-link">Home</a>
-            <a href="${pageContext.request.contextPath}/category?categotyId=<%= categoryId %>" class="back-link"><%= categoryName %></a>
+            <a href="${pageContext.request.contextPath}/view/home" class="back-link">Home</a>
+            <a href="${pageContext.request.contextPath}/view/${pageContext.request.contextPath}/category?categotyId=<%= categoryId %>" class="back-link"><%= categoryName %></a>
         </div>
 
         <% 
@@ -77,28 +74,7 @@
             <% } %>
         </div>
     </div>
-<div class="product-list">
-            <%
-                ArrayList<Feedback> feedback = (ArrayList<Feedback>) request.getAttribute("feedbackList");
-                if (feedback != null && !feedback.isEmpty()) {
-                    for (Feedback f : feedback) {
-            %>
-            <div class="feedback-card">               
-                <div>
-                    <h3><%= f.getUser().getName() %></h3>
-                    <p><%= f.getContent() %></p>
-                    <p><%= f.getCreatedAt() %></p>                 
-                </div>
-            </div>
-            <%
-                    }
-                } else {
-            %>
-            <p class="no-results">This product don't have feedback.</p>
-            <%
-                }
-            %>
-        </div>
+
     <script>
         function updateQuantity(change) {
             let quantityInput = document.getElementById('quantity');

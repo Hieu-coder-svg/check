@@ -14,6 +14,9 @@
     </head>
     <body>
         <div class="header">
+            <div class="logo">
+                <!--<img src="images/logo_ver5.jpg" alt="Logo Image">-->
+            </div>
             
             <h2 class="shop_name">Healthy Food</h2>
             <nav class="menu">

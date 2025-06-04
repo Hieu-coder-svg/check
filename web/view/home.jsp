@@ -25,7 +25,33 @@
             <div class="content-main">
                 <div class="content-left">
                     <div>
-                        <i>Price Filter</i>
+                        <form action="pricefilter" method="get">
+                            <table border="1">
+                                <b>Price Filter:</b>
+                                <tr>
+                                <td>Min price:</td>
+                                <td><input type="number" name="minPrice" value="${minPrice}" min="0" max="1000" placeholder="Enter min price"></td>
+                                </tr>
+                                <tr>
+                                <td>Max price:</td>
+                                <td><input type="number" name="maxPrice" value="${maxPrice}" min="0" max="1000" placeholder="Enter max price"></td>
+                                </tr>
+
+                            </table>
+                                        <c:if test="${not empty eMessage}">
+                                            <div style="color:red">${eMessage}</div>
+                                        </c:if>
+
+                                        <c:if test="${not empty notFoundMessage}">
+                                            <div style="color:red">${notFoundMessage}</div>
+                                        </c:if>
+                                <input type="submit" value="Filter">
+                        </form>
+                    </div>
+                    <div>
+                        <b>Sort Product:</b>
+                        <button onclick="location.href='sortproduct?orderBy=desc'">Descending</button>
+                        <button onclick="location.href='sortproduct?orderBy=Asc'">Ascending</button>
                     </div>
                 </div>
 

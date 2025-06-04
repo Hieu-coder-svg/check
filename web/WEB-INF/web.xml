@@ -32,6 +32,14 @@
         <servlet-name>SearchServlet</servlet-name>
         <servlet-class>controller.SearchServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SortProductServlet</servlet-name>
+        <servlet-class>controller.SortProductServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PriceFilterServlet</servlet-name>
+        <servlet-class>controller.PriceFilterServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeDisplayServlet</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -63,5 +71,13 @@
     <servlet-mapping>
         <servlet-name>SearchServlet</servlet-name>
         <url-pattern>/search</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SortProductServlet</servlet-name>
+        <url-pattern>/sortproduct</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PriceFilterServlet</servlet-name>
+        <url-pattern>/pricefilter</url-pattern>
     </servlet-mapping>
 </web-app>
