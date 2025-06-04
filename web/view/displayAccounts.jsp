@@ -59,7 +59,13 @@
     </head>
     <body>
         <div>
-            <h2>Accounts for Role ID: ${roleId}</h2>
+            <form action="DisplayAccount" method="post">                   
+                <input type="hidden" name="idRole" value="${roleId}">
+                <input type="image" src="${pageContext.request.contextPath}/icons/search_icon.png" alt="Search" width="20" height="20">
+                <input type="text" name="keyword" placeholder="Search...">
+            </form>
+        </div>  
+        <div>          
             <c:if test="${not empty error}">
                 <p class="error">${error}</p>
             </c:if>
@@ -84,7 +90,7 @@
                                 <td>${user.name}</td>
                                 <td>${user.email}</td>
                                 <td>
-                                <a href="UpdateAccount?id=${user.id}&roleId=${roleId}" class="btn">Update</a>
+                                    <a href="UpdateAccount?id=${user.id}&roleId=${roleId}" class="btn">Update</a>
                                 </td>
                                 <td>
                                     <a href="DeleteUser?id=${user.id}&roleId=${roleId}" 

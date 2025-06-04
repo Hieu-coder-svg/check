@@ -62,13 +62,13 @@
         </style>
     </head>
     <body>
-        <div class="header">
+<!--        <div class="header">
             <a href="#">EazyDeals</a>
             <div class="user-info">
                 <span>Admin 1</span>
                 <a href="#">Logout</a>
             </div>
-        </div>
+        </div>-->
         <div class="welcome">
             <img src="images/admin.jpg" alt="Admin Avatar" onclick="location.href='DisplayAccount?idRole=1'">
             <h2>Welcome "Admin 1"</h2>
