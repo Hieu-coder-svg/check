@@ -63,7 +63,7 @@
                     <input type="hidden" name="productId" value="<%= productId %>">
                     <div class="quantity-controls">
                         <button type="button" onclick="updateQuantity(-1)">-</button>
-                        <input type="text" name="number" id="quantity" value="1" readonly>
+                        <input type="text" name="number" id="quantity" value="1" min ="1" max="${product.stock}">
                         <button type="button" onclick="updateQuantity(1)">+</button>
                     </div>
                     <button type="submit">Add to Cart</button>
@@ -74,7 +74,33 @@
             <% } %>
         </div>
     </div>
-
+<div class="product-list">
+            <%
+                ArrayList<Feedback> feedback = (ArrayList<Feedback>) request.getAttribute("feedbackList");
+                if (feedback != null && !feedback.isEmpty()) {
+                    for (Feedback f : feedback) {
+            %>
+            <div class="feedback-card">               
+                <div>
+                    <h3><%= f.getUser().getName() %></h3>
+                    <p><%= f.getContent() %></p>
+                    <p><%= f.getCreatedAt() %></p>                 
+                </div>
+            </div>
+            <%
+                    }
+                } else {
+            %>
+            <p class="no-results">This product don't have feedback.</p>
+            <%
+                }
+            %>
+             <form method="post" action="${pageContext.request.contextPath}/productDetail">
+                <input type="hidden" name="productId" value="<%= productId %>">
+                <textarea name="content" placeholder="Write your comment..." required></textarea>
+                <button type="submit" name="action" value="comment">Submit Comment</button>
+            </form>
+        </div>
     <script>
         function updateQuantity(change) {
             let quantityInput = document.getElementById('quantity');

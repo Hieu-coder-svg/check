@@ -72,6 +72,9 @@
         <servlet-name>SearchServlet</servlet-name>
         <url-pattern>/search</url-pattern>
     </servlet-mapping>
+     <welcome-file-list>
+        <welcome-file>home</welcome-file>
+    </welcome-file-list>
     <servlet-mapping>
         <servlet-name>SortProductServlet</servlet-name>
         <url-pattern>/sortproduct</url-pattern>
