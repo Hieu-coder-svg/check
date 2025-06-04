@@ -1,5 +1,5 @@
-
 package controller;
+
 import dal.DAOFeedback;
 import dal.DAOOrder;
 import dal.DAOProduct;
@@ -13,40 +13,44 @@ import java.util.ArrayList;
 import java.util.List;
 import model.Feedback;
 import model.Product;
+import model.User;
 
 /**
  *
  * @author HP
  */
 public class ProductDetailServlet extends HttpServlet {
-   
-    /** 
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
+
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet productDetailServlet</title>");  
+            out.println("<title>Servlet productDetailServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet productDetailServlet at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet productDetailServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
-    } 
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /** 
+    /**
      * Handles the HTTP <code>GET</code> method.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -54,8 +58,8 @@ public class ProductDetailServlet extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-         String productIdStr = request.getParameter("productId");
+            throws ServletException, IOException {
+        String productIdStr = request.getParameter("productId");
         int productId;
         try {
             productId = Integer.parseInt(productIdStr);
@@ -66,7 +70,7 @@ public class ProductDetailServlet extends HttpServlet {
         }
 
         DAOProduct dao = new DAOProduct();
-        Product product = dao.getProductById(productId); 
+        Product product = dao.getProductById(productId);
         if (product == null) {
             request.setAttribute("error", "Product not found.");
             request.getRequestDispatcher("view/productDetail.jsp").forward(request, response);
@@ -86,11 +90,12 @@ public class ProductDetailServlet extends HttpServlet {
         request.setAttribute("categoryId", product.getCategory().getId());
         request.setAttribute("feedbackList", feedbackList);
         request.getRequestDispatcher("view/productDetail.jsp").forward(request, response);
-        
-    } 
 
-    /** 
+    }
+
+    /**
      * Handles the HTTP <code>POST</code> method.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -98,8 +103,41 @@ public class ProductDetailServlet extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-       String productIdStr = request.getParameter("productId");
+            throws ServletException, IOException {
+        String action = request.getParameter("action");
+        if ("comment".equals(action)) {
+            
+            User user = (User) request.getSession().getAttribute("user");
+            if (user == null || user.getRole().getId()!= 3) {
+                response.sendRedirect("login.jsp");
+                return;
+            }
+
+            String content = request.getParameter("content");
+            if (content == null || content.trim().isEmpty()) {
+                request.setAttribute("error", "Comment cannot be empty.");
+                doGet(request, response);
+                return;
+            }
+
+            Feedback feedback = new Feedback();
+            feedback.setUser(user);
+            Product product = new Product();
+            product.setId(Integer.parseInt(request.getParameter("productId")));
+            feedback.setProduct(product);
+
+            feedback.setContent(content);
+            feedback.setCreatedAt(new java.sql.Timestamp(System.currentTimeMillis()));
+
+            DAOFeedback daoFeedback = new DAOFeedback();
+            daoFeedback.insertFeedback(feedback);
+
+            request.setAttribute("message", "Comment submitted successfully.");
+            doGet(request, response); // Load lại feedback list và trang chi tiết
+            return;
+        }
+
+        String productIdStr = request.getParameter("productId");
         int productId;
         try {
             productId = Integer.parseInt(productIdStr);
@@ -123,7 +161,7 @@ public class ProductDetailServlet extends HttpServlet {
 
         DAOProduct dao = new DAOProduct();
         Product product = dao.getProductById(productId);
-        
+
         if (product == null) {
             request.setAttribute("error", "Product not found.");
             doGet(request, response);
@@ -148,8 +186,9 @@ public class ProductDetailServlet extends HttpServlet {
         request.getRequestDispatcher("view/productDetail.jsp").forward(request, response);
     }
 
-    /** 
+    /**
      * Returns a short description of the servlet.
+     *
      * @return a String containing servlet description
      */
     @Override
