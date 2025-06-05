@@ -25,6 +25,31 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
 body{
     background: #E2FEE5;
 }
+.header{
+    display:flex;
+    
+    height:200px;
+    
+}
+.header-right{
+    width:75%;
+    margin-right:10%;
+    margin-top:3%;
+}
+
+
+.logo{
+    width:15%;
+    height:15%;
+    margin-top: 3%;
+    margin-left:10%;
+    
+}
+.logo img{
+    width:150px;
+    height:150px;
+    object-fit: contain;
+}
 .menu{
     font-size: 20px;
     font-weight: bold
@@ -32,6 +57,7 @@ body{
 }
 .menu a{
     color: #F3F2F3;
+    
     text-decoration: none;
     margin-left: 5%;
     transition: color 0.3s ease;
@@ -152,12 +178,58 @@ body{
     gap:5px;
     width:100%;
 }
-.content-left{
-    width:22%;
-    border: 1px solid;
-}
+
 .content-right{
     width:75%;
-    border:1px solid;
+    border: 1px solid #ccc;
+    background-color: #f9fff9;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    border-radius: 8px;
     margin-left:3%;
+}
+.content-left {
+    width: 22%;
+    border: 1px solid #ccc;
+    padding: 15px;
+    background-color: #f9fff9;
+    
+    border-radius: 8px;
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+}
+.content-left b {
+    display: block;
+    margin-bottom: 5px;
+    color: #2d5f34;
+}
+.content-left input[type="number"] {
+    width: 90%;
+    padding: 5px;
+    margin-bottom: 10px;
+}
+.content-left input[type="submit"],
+.content-left button {
+    margin-top: 10px;
+    padding: 5px 10px;
+    background-color: #A8E4A0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+.content-left input[type="submit"]:hover,
+.content-left button:hover {
+    background-color: #8ccc8f;
+}
+.content-left table {
+    width: 100%;
+    border: none;
+    border-collapse: collapse;
+}
+.content-left td {
+    padding: 5px;
+    vertical-align: middle;
 }

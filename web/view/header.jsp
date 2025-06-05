@@ -15,13 +15,13 @@
     <body>
         <div class="header">
             <div class="logo">
-                <!--<img src="images/logo_ver5.jpg" alt="Logo Image">-->
+                <img src="images/logo_1.png" alt="Logo Image">
             </div>
-            
+            <div class="header-right">
             <h2 class="shop_name">Healthy Food</h2>
             <nav class="menu">
                 <a href="${pageContext.request.contextPath}/home">Home</a>
-                <a href="login.jsp">Login</a>
+                <a href="view/login.jsp">Login</a>
                 <a href="cart.jsp">Cart</a>
 
                 <form action="search" method="get">                   
@@ -31,6 +31,7 @@
 
 
             </nav>
+            </div>
         </div>
 
 
