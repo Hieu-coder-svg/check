@@ -18,7 +18,7 @@
       </div>
       <input type="submit" value="Login" />
       <div class="register">
-        Not a Member? <a href="signup.php">Register</a>
+        Don't have an account? <a href="signup.php">Register</a>
       </div>
     </form>
   </div>
