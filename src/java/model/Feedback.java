@@ -17,13 +17,14 @@ public class Feedback {
     private Product product;
     private String content;
     private Timestamp createdAt;
-
-    public Feedback(int id, User user, Product product, String content, Timestamp createdAt) {
+    private double rate;
+    public Feedback(int id, User user, Product product, String content, Timestamp createdAt,double rate) {
         this.id = id;
         this.user = user;
         this.product = product;
         this.content = content;
         this.createdAt = createdAt;
+        this.rate = rate;
     }
 
     public Feedback() {
@@ -68,6 +69,10 @@ public class Feedback {
     public void setCreatedAt(Timestamp createdAt) {
         this.createdAt = createdAt;
     }
-    
-    
+    public void setRate(double rate){
+        this.rate = rate;
+    }
+     public double getRate(){
+        return rate;
+    }
 }

@@ -30,7 +30,7 @@ public class DAOProduct {
 
     public List<Product> getAllProduct() {
         List<Product> productList = new ArrayList<>();
-        String sql = "select p.id as product_id, p.name as product_name, p.description, p.price, p.stock, p.image_url, p.shelf_life_hours, "
+        String sql = "select p.id as product_id, p.name as product_name, p.description, p.price, p.stock, p.image_url, p.shelf_life_hours, p.rate, "
                 + "c.id as category_id, c.name as category_name "
                 + "FROM Product p "
                 + "INNER JOIN Category c ON p.category_id = c.id";
@@ -46,6 +46,7 @@ public class DAOProduct {
                 p.setStock(rs.getInt("stock"));
                 p.setImgUrl(rs.getString("image_url"));
                 p.setShelfLifeHours(rs.getDouble("shelf_life_hours"));
+                p.setRate(rs.getDouble("rate"));
 
                 Category c = new Category();
                 c.setId(rs.getInt("category_id"));
@@ -63,7 +64,7 @@ public class DAOProduct {
 
     public List<Product> searchProduct(String namesearch) {
         List<Product> productList = new ArrayList<>();
-        String sql = "SELECT p.id as product_id, p.name as product_name, p.description, p.price, p.stock, p.image_url, p.shelf_life_hours, "
+        String sql = "SELECT p.id as product_id, p.name as product_name, p.description, p.price, p.stock, p.image_url, p.shelf_life_hours,p.rate, "
                 + "c.id as category_id, c.name as category_name "
                 + "FROM Product p "
                 + "INNER JOIN Category c ON p.category_id = c.id "
@@ -81,7 +82,7 @@ public class DAOProduct {
                 p.setStock(rs.getInt("stock"));
                 p.setImgUrl(rs.getString("image_url"));
                 p.setShelfLifeHours(rs.getDouble("shelf_life_hours"));
-
+                p.setRate(rs.getDouble("rate"));
                 Category c = new Category();
                 c.setId(rs.getInt("category_id"));
                 c.setName(rs.getString("category_name"));
@@ -95,17 +96,16 @@ public class DAOProduct {
         return productList;
     }
 
-    
-    public List<Product> getPriceSorted(String orderBy){        
+    public List<Product> getPriceSorted(String orderBy) {
         List<Product> productList = new ArrayList<>();
-        String sql = "SELECT p.id as product_id, p.name as product_name, p.description, p.price, p.stock, p.image_url, p.shelf_life_hours, "
+        String sql = "SELECT p.id as product_id, p.name as product_name, p.description, p.price, p.stock, p.image_url, p.shelf_life_hours,p.rate, "
                 + "c.id as category_id, c.name as category_name "
                 + "FROM Product p "
                 + "INNER JOIN Category c ON p.category_id = c.id "
                 + "ORDER BY p.price " + orderBy;
         try {
             PreparedStatement st = con.prepareStatement(sql);
-            
+
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
                 Product p = new Product();
@@ -116,7 +116,7 @@ public class DAOProduct {
                 p.setStock(rs.getInt("stock"));
                 p.setImgUrl(rs.getString("image_url"));
                 p.setShelfLifeHours(rs.getDouble("shelf_life_hours"));
-
+                p.setRate(rs.getDouble("rate"));
                 Category c = new Category();
                 c.setId(rs.getInt("category_id"));
                 c.setName(rs.getString("category_name"));
@@ -129,10 +129,10 @@ public class DAOProduct {
         }
         return productList;
     }
-    
-    public List<Product> getPriceInRange(double min,double max){        
+
+    public List<Product> getPriceInRange(double min, double max) {
         List<Product> productList = new ArrayList<>();
-        String sql = "SELECT p.id as product_id, p.name as product_name, p.description, p.price, p.stock, p.image_url, p.shelf_life_hours, "
+        String sql = "SELECT p.id as product_id, p.name as product_name, p.description, p.price, p.stock, p.image_url, p.shelf_life_hours,p.rate, "
                 + "c.id as category_id, c.name as category_name "
                 + "FROM Product p "
                 + "INNER JOIN Category c ON p.category_id = c.id "
@@ -151,7 +151,7 @@ public class DAOProduct {
                 p.setStock(rs.getInt("stock"));
                 p.setImgUrl(rs.getString("image_url"));
                 p.setShelfLifeHours(rs.getDouble("shelf_life_hours"));
-
+                p.setRate(rs.getDouble("rate"));
                 Category c = new Category();
                 c.setId(rs.getInt("category_id"));
                 c.setName(rs.getString("category_name"));
@@ -164,14 +164,11 @@ public class DAOProduct {
         }
         return productList;
     }
-    
-    
-
 
     public Product getProductById(int productId) {
         Product product = null;
         try {
-            String sql = "SELECT p.id, p.name, p.description, p.price, p.stock, p.image_url, p.shelf_life_hours,c.id AS category_id, c.name AS category_name "
+            String sql = "SELECT p.id, p.name, p.description, p.price, p.stock, p.image_url, p.shelf_life_hours,p.rate, c.id AS category_id, c.name AS category_name "
                     + "FROM Product p JOIN Category c ON p.category_id = c.id WHERE p.id = ?";
             PreparedStatement statement = con.prepareStatement(sql);
             statement.setInt(1, productId);

@@ -4,8 +4,6 @@
  */
 package model;
 
-
-
 /**
  *
  * @author ASUS
@@ -20,11 +18,12 @@ public class Product {
     private String imgUrl;
     private Category category;
     private double shelfLifeHours;
+    private double rate;
 
     public Product() {
     }
 
-    public Product(int id, String name, String description, double price, int stock, String imgUrl, Category category, double shelfLifeHours) {
+    public Product(int id, String name, String description, double price, int stock, String imgUrl, Category category, double shelfLifeHours, double rate) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -33,6 +32,7 @@ public class Product {
         this.imgUrl = imgUrl;
         this.category = category;
         this.shelfLifeHours = shelfLifeHours;
+        this.rate = rate;
     }
 
     public int getId() {
@@ -99,4 +99,7 @@ public class Product {
         this.shelfLifeHours = shelfLifeHours;
     }
 
+    public void setRate(double rate) {
+        this.rate = rate;
+    }
 }

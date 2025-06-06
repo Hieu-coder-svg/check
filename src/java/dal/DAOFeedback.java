@@ -33,7 +33,7 @@ public class DAOFeedback {
     public ArrayList getFeedbackByProductId(int productId) {
         ArrayList<Feedback> feedbackList = new ArrayList<>();
         try {
-            String sql = "SELECT f.id,f.content,f.created_at,p.id AS product_id,p.name,p.price,p.shelf_life_hours,p.stock,p.image_url,p.description,u.id AS user_id,u.name AS user_name,u.email,u.password,u.phone,u.dob,u.address,u.gender,u.created_at AS user_created_at "
+            String sql = "SELECT f.id,f.content,f.created_at,f.rate,p.id AS product_id,p.name,p.price,p.shelf_life_hours,p.stock,p.image_url,p.description,p.rate AS rate_product,u.id AS user_id,u.name AS user_name,u.email,u.password,u.phone,u.dob,u.address,u.gender,u.created_at AS user_created_at "
                     + "FROM Feedback f "
                     + "JOIN Product p on p.id = f.product_id "
                     + "JOIN Users u on u.id = f.user_id WHERE p.id = ?";
@@ -46,6 +46,7 @@ public class DAOFeedback {
                 feedback.setId(rs.getInt("id"));
                 feedback.setContent(rs.getString("content"));
                 feedback.setCreatedAt(rs.getTimestamp("created_at"));
+                feedback.setRate(rs.getDouble("rate"));
 
                 Product p = new Product();
                 p.setId(rs.getInt("product_id"));
@@ -55,7 +56,7 @@ public class DAOFeedback {
                 p.setStock(rs.getInt("stock"));
                 p.setImgUrl(rs.getString("image_url"));
                 p.setShelfLifeHours(0);
-
+                p.setRate(rs.getDouble("rate"));
                 User u = new User();
                 u.setId(rs.getInt("user_id"));
                 u.setName(rs.getString("user_name"));
@@ -81,15 +82,16 @@ public class DAOFeedback {
     }
 
     public void insertFeedback(Feedback feedback) {
-        String sql = "INSERT INTO Feedback(user_id, product_id, content, created_at) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO Feedback(user_id, product_id, content, created_at, rate) VALUES (?, ?, ?, ?,? )";
         try (PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setInt(1, feedback.getUser().getId());
             ps.setInt(2, feedback.getProduct().getId());
             ps.setString(3, feedback.getContent());
             ps.setTimestamp(4, feedback.getCreatedAt());
+             ps.setDouble(5, feedback.getRate());
             ps.executeUpdate();
         } catch (SQLException e) {
-           Logger.getLogger(DAO.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(DAO.class.getName()).log(Level.SEVERE, null, e);
         }
     }
 }
