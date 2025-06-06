@@ -37,6 +37,13 @@
                 border-radius: 4px;
                 box-sizing: border-box;
             }
+            select {
+                width: 100%;
+                padding: 8px;
+                border: 1px solid #ddd;
+                border-radius: 4px;
+                box-sizing: border-box;
+            }
             .error {
                 color: red;
                 text-align: center;
@@ -68,13 +75,6 @@
                 color: #666;
                 font-size: 12px;
                 margin-top: 5px;
-            }
-            .read-only {
-                background-color: #f9f9f9;
-                border: none;
-                padding: 8px;
-                border-radius: 4px;
-                display: block;
             }
         </style>
     </head>
@@ -123,13 +123,16 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label>Role (Read-only):</label>
-                    <input type="text" class="read-only" value="${user.role.roleName}" readonly>
-                    <input type="hidden" name="roleId" value="${user.role.id}">
+                    <label for="roleId">Role:</label>
+                    <select id="roleId" name="roleId">
+                        <c:forEach items="${roles}" var="role">
+                            <option value="${role.id}" ${user.role.id == role.id ? 'selected' : ''}>${role.roleName}</option>
+                        </c:forEach>
+                    </select>
                 </div>
                 <div>
                     <button type="submit" class="btn btn-submit">Update</button>
-                    <button type="button" class="btn btn-back" onclick="location.href='DisplayAccount?idRole=${user.role.id}'">Back to List</button>
+                    <button type="button" class="btn btn-back" onclick="location.href='DisplayAccount?idRole=${user.role.id}&page=1'">Back to List</button>
                 </div>
             </form>
         </div>

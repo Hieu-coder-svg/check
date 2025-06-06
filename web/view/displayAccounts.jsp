@@ -55,6 +55,30 @@
                 text-align: center;
                 margin: 20px;
             }
+            .success {
+                color: green;
+                text-align: center;
+                margin: 20px;
+            }
+            .pagination {
+                text-align: center;
+                margin: 20px;
+            }
+            .pagination a {
+                padding: 5px 10px;
+                margin: 0 5px;
+                background-color: #ddd;
+                text-decoration: none;
+                color: #333;
+                border-radius: 3px;
+            }
+            .pagination a:hover {
+                background-color: #bbb;
+            }
+            .pagination .active {
+                background-color: #4CAF50;
+                color: white;
+            }
         </style>
     </head>
     <body>
@@ -66,6 +90,9 @@
             </form>
         </div>  
         <div>          
+            <c:if test="${not empty success}">
+                <p class="success">${success}</p>
+            </c:if>
             <c:if test="${not empty error}">
                 <p class="error">${error}</p>
             </c:if>
@@ -101,6 +128,18 @@
                         </c:forEach>
                     </tbody>
                 </table>
+                <div>
+                    <a href="AddUser?roleId=${roleId}" class="btn">ADD</a>
+                </div>
+                <div class="pagination">
+                    <c:if test="${currentPage > 1}">
+                        <a href="DisplayAccount?idRole=${roleId}&page=${currentPage - 1}">Previous</a>
+                    </c:if>
+                    <span>Page ${currentPage} of ${totalPages}</span>
+                    <c:if test="${currentPage < totalPages}">
+                        <a href="DisplayAccount?idRole=${roleId}&page=${currentPage + 1}">Next</a>
+                    </c:if>
+                </div>
             </c:if>
             <button onclick="location.href = 'HomeAdmin'">Back to Role List</button>
         </div>

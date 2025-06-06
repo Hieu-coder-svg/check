@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import model.Role;
 
 public class DAOUser {
+
     public static DAOUser INSTANCE = new DAOUser();
     private Connection con;
     private String status = "OK";
@@ -112,8 +113,6 @@ public class DAOUser {
         }
         return userList;
     }
-
-
 
     public boolean updateUser(User user) {
         String sql = "UPDATE Users SET name = ?, email = ?, password = ?, phone = ?, dob = ?, address = ?, gender = ?, role_id = ? WHERE id = ?";
@@ -237,6 +236,30 @@ public class DAOUser {
                 System.err.println(status);
             }
         }
+    }
+
+    public boolean checkEmailExists(String email, int userId) {
+        String sql = "SELECT COUNT(*) FROM Users WHERE email = ? AND id != ?";
+        try {
+            if (con == null) {
+                status = "Error: Database connection is null";
+                return false;
+            }
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, email);
+            ps.setInt(2, userId);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1) > 0;
+            }
+            rs.close();
+            ps.close();
+            status = "OK: Checked email existence";
+        } catch (SQLException e) {
+            status = "Error at checkEmailExists: " + e.getMessage();
+            System.err.println(status);
+        }
+        return false;
     }
 
     public String getStatus() {

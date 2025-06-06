@@ -1,6 +1,7 @@
 package controller;
 
 import dal.DAOUser;
+import dal.DAORole;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -11,10 +12,12 @@ import java.io.IOException;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import model.User;
 import model.Role;
 
 public class UpdateAccountServlet extends HttpServlet {
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -39,7 +42,17 @@ public class UpdateAccountServlet extends HttpServlet {
                 request.getRequestDispatcher("view/error.jsp").forward(request, response);
                 return;
             }
+
+            // Lấy danh sách tất cả vai trò từ DAORole
+            ArrayList<Role> roles = DAORole.INSTANCE.getAllRoles();
+            if (roles == null || roles.isEmpty()) {
+                request.setAttribute("error", "Error retrieving roles");
+                request.getRequestDispatcher("view/error.jsp").forward(request, response);
+                return;
+            }
+
             request.setAttribute("user", user);
+            request.setAttribute("roles", roles);
             RequestDispatcher dispatcher = request.getRequestDispatcher("view/updateAccount.jsp");
             dispatcher.forward(request, response);
         } catch (NumberFormatException e) {
@@ -85,7 +98,14 @@ public class UpdateAccountServlet extends HttpServlet {
             }
 
             DAOUser daoUser = DAOUser.INSTANCE;
-            
+            if (daoUser.checkEmailExists(email, id)) {
+//                request.setAttribute("error", "Email already exists for another user");
+//                request.getRequestDispatcher("view/updateAccount.jsp").forward(request, response);
+                session.setAttribute("error", "Email already exists for another user");
+                response.sendRedirect("UpdateAccount?id=" + id +"&roleId="+roleIdStr);
+                return;
+            }
+
             Date dob = null;
             if (dobStr != null && !dobStr.trim().isEmpty()) {
                 try {
@@ -129,7 +149,8 @@ public class UpdateAccountServlet extends HttpServlet {
             System.out.println("Role ID: " + roleId);
             boolean updated = daoUser.updateUser(user);
             if (updated) {
-                response.sendRedirect("DisplayAccount?idRole=" + roleId);
+                session.setAttribute("success", "User with ID " + id + " updated successfully at " + new java.util.Date());
+                response.sendRedirect("DisplayAccount?idRole=" + roleId + "&page=1");
             } else {
                 System.err.println("Update failed: " + daoUser.getStatus());
                 request.setAttribute("error", "Failed to update user: " + daoUser.getStatus());
