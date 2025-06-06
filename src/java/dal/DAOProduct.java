@@ -182,7 +182,7 @@ public class DAOProduct {
                 product.setStock(rs.getInt("stock"));
                 product.setImgUrl(rs.getString("image_url"));
                 product.setShelfLifeHours(0);
-
+                product.setRate(rs.getDouble("rate"));
                 Category c = new Category();
                 c.setId(rs.getInt("category_id"));
                 c.setName(rs.getString("category_name"));

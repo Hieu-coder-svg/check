@@ -89,6 +89,8 @@ public class ProductDetailServlet extends HttpServlet {
         request.setAttribute("categoryName", product.getCategory().getName());
         request.setAttribute("categoryId", product.getCategory().getId());
         request.setAttribute("feedbackList", feedbackList);
+        request.setAttribute("rate", product.getRate());
+        
         request.getRequestDispatcher("view/productDetail.jsp").forward(request, response);
 
     }

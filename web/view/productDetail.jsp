@@ -15,7 +15,7 @@
                 padding: 0;
             }
             .container {
-                max-width: 800px;
+                
                 margin: 30px auto;
                 padding: 20px;
                 background-color: #ffffff;
@@ -43,13 +43,20 @@
             }
 
             .product-img {
-                max-width: 300px;
+                max-width: 400px;
                 border-radius: 10px;
                 box-shadow: 0 2px 6px rgba(0,0,0,0.1);
             }
 
-            .product-details h3 {
+            .product-details .name-rate {
+                display: flex;
+                align-items: center;
+                gap: 10px;
                 margin-top: 0;
+            }
+
+            .product-details h3 {
+                margin: 0;
                 color: #3e7d4d;
             }
 
@@ -148,7 +155,24 @@
                 color: #6a9e6d;
                 font-weight: bold;
             }
-
+            .stars {
+                display: flex;
+                flex-direction: row-reverse;
+                justify-content: flex-end;
+            }
+            .stars input {
+                display: none;
+            }
+            .stars label {
+                font-size: 2rem;
+                color: #ccc;
+                cursor: pointer;
+            }
+            .stars input:checked ~ label,
+            .stars label:hover,
+            .stars label:hover ~ label {
+                color: gold;
+            }
         </style>
     </head>
     <body>
@@ -164,18 +188,18 @@
             Double shelfLifeHours = (Double) request.getAttribute("time");
             String img = (String) request.getAttribute("img");
             String categoryName = (String) request.getAttribute("categoryName");
-            Integer categoryId = (Integer) request.getAttribute("categoryId");
+            Integer categoryId = (Integer) request.getAttribute("categoryId"); 
+            Double rate = (Double) request.getAttribute("rate");
         %>
 
         <div class="container">
             <div class="back-links">
                 <a href="${pageContext.request.contextPath}/home" class="back-link">Home</a>
-                <span class="breadcrumb-separator">&raquo;</span>
+                <span class="breadcrumb-separator">»</span>
                 <a href="${pageContext.request.contextPath}/category?categoryId=<%= categoryId %>" class="back-link"><%= categoryName %></a>
             </div>
 
             <%
-               
                 String message = (String) request.getAttribute("message");
                 if (message != null) {
             %>
@@ -188,7 +212,11 @@
                     <img src="<%= img %>" alt="<%= productName %>" class="product-img"/>
                 </div>
                 <div>
-                    <h3><%= productName %></h3>
+                    <div class="name-rate">
+                        <h3><%= productName %></h3>
+                        <p><%= String.format("%.1f", rate) %> ★</p> 
+                    </div>
+                  
                     <p>Category: <%= categoryName %></p>
                     <p>Price: $<%= String.format("%.2f", price) %></p>
                     <p>Stock: <%= stock %></p>
@@ -203,13 +231,13 @@
                             <button type="button" onclick="updateQuantity(1)">+</button>
                         </div>
                         <%
-    String error = (String) request.getAttribute("error");
-    if (error != null) {
+                            String error = (String) request.getAttribute("error");
+                            if (error != null) {
                         %>
                         <p class="error"><%= error %></p>
                         <% } %>
-                        <button type="submit" value="addCart">Add to Cart</button>
-                        <button type="submit" value="buy">Buy</button>
+                        <button type="submit" value="addCart">🛒 Add to Cart</button>
+                        <button type="submit" value="buy">💰 Buy</button>
                     </form>
                 </div>
                 <% } else { %>
@@ -239,6 +267,13 @@
 
                 <form method="post" action="${pageContext.request.contextPath}/productDetail">
                     <input type="hidden" name="productId" value="<%= productId %>">
+                    <div class="stars">
+                        <input type="radio" id="star5" name="rating" value="1"><label for="star5">★</label>
+                        <input type="radio" id="star4" name="rating" value="2"><label for="star4">★</label>
+                        <input type="radio" id="star3" name="rating" value="3"><label for="star3">★</label>
+                        <input type="radio" id="star2" name="rating" value="4"><label for="star2">★</label>
+                        <input type="radio" id="star1" name="rating" value="5"><label for="star1">★</label>
+                    </div>
                     <textarea name="content" placeholder="Write your comment..." required></textarea>
                     <button type="submit" name="action" value="comment">Submit Comment</button>
                 </form>
