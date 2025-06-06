@@ -9,7 +9,7 @@
     <body>
         <div class="center">
             <h1>Login</h1>
-            <form action="login" method="post">
+            <form action="abc" method="post">
                 <div class="txt_field">
                     <input type="email" name="email" placeholder="Email" required />
                 </div>

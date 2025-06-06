@@ -21,7 +21,7 @@
             <h2 class="shop_name">Healthy Food</h2>
             <nav class="menu">
                 <a href="${pageContext.request.contextPath}/home">Home</a>
-                <a href="view/login.jsp">Login</a>
+                <a href="${pageContext.request.contextPath}/login">Login</a>
                 <a href="cart.jsp">Cart</a>
 
                 <form action="search" method="get">                   
