@@ -9,16 +9,16 @@
     <body>
         <div class="center">
             <h1>Login</h1>
-            <form action="" method="POST">
+            <form action="login" method="post">
                 <div class="txt_field">
                     <input type="email" name="email" placeholder="Email" required />
                 </div>
                 <div class="txt_field">
                     <input type="password" name="password" placeholder="Password" required />
                 </div>
-                <input type="submit" value="Login" />
-                <div class="register">
-                    Don't have an account? <a href="signup.php">Register</a>
+                <input type="submit" value="Login">
+                <div class="auth-switch">
+                    Don't have an account? <a href="register.jsp">Register</a>
                 </div>
             </form>
         </div>

@@ -59,17 +59,17 @@ input[type="submit"]:hover {
   background: #0056b3;
 }
 
-.register {
+.auth-switch {
   text-align: center;
   margin-top: 20px;
   font-size: 14px;
 }
 
-.register a {
+.auth-switch a {
   color: #007bff;
   text-decoration: none;
 }
 
-.register a:hover {
+.auth-switch a:hover {
   text-decoration: underline;   
 }

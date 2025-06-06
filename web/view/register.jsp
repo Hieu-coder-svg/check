@@ -50,6 +50,9 @@
                 </div>
 
                 <input type="submit" value="Register" />
+                <div class="auth-switch">
+                    Already have an account? <a href="login.jsp ">Login</a>
+                </div>
 
             </form>
         </div>
