@@ -6,7 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
@@ -21,7 +21,7 @@
             <h2 class="shop_name">Healthy Food</h2>
             <nav class="menu">
                 <a href="${pageContext.request.contextPath}/home">Home</a>
-                <a href="${pageContext.request.contextPath}/login">Login</a>
+                <a href="${pageContext.request.contextPath}/view/login.jsp">Login</a>
                 <a href="cart.jsp">Cart</a>
 
                 <form action="search" method="get">                   

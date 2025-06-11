@@ -29,10 +29,10 @@
                 </div>
 
                 <div class="txt_field gender-group">
-                    <label>Gender:</label>
-                    <div class="radio-options">
+                    <label for="gender-group">Gender:</label>
+                    <div class="radio-options" id="gender-group">
                         <label><input type="radio" name="gender" value="0" required /> Male</label>
-                        <label><input type="radio" name="gender" value="1" /> Female</label>
+                        <label><input type="radio" name="gender" value="1" required /> Female</label>
                     </div>
                 </div>
 

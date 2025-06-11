@@ -7,7 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
@@ -27,7 +27,8 @@
                     <div>
                         <form action="pricefilter" method="get">
                             <table border="1">
-                                <b>Price Filter:</b>
+                                <th>
+                                    <b>Price Filter:</b></th>
                                 <tr>
                                 <td>Min price:</td>
                                 <td><input type="number" name="minPrice" value="${minPrice}" min="0" max="1000" placeholder="Enter min price"></td>
@@ -72,7 +73,7 @@
                         <c:forEach items="${requestScope.productList}" var="o">
                             <div class="card">
                                 <a href="${pageContext.request.contextPath}/productDetail?productId=${o.id}">
-                                <img class="card-img" src="${o.imgUrl}" alt="Product Image">
+                                <img class="card-img" src="${o.imgUrl}" alt="Product">
                                 </a>
                                 <div class="card-body">
                                     <p>Product: ${o.name}</p>

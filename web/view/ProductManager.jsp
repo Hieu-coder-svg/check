@@ -1,6 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Product Manager</title>
@@ -59,7 +59,7 @@
     </c:if>
 
     <!-- Update Product Form -->
-<!--    <c:if test="${productUpdate ne null}">
+
         <h4 class="text-center mb-4 text-primary fw-bold">Update Product</h4>
         <form action="manageProduct" id="updateProduct" class="mb-4">
             <input type="hidden" name="service" value="sendUpdateDetail"/>
@@ -156,6 +156,8 @@
     <%@include file="footer.jsp" %>
 
     <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" 
+        integrity="sha384-..." 
+        crossorigin="anonymous"></script>
 </body>
 </html>

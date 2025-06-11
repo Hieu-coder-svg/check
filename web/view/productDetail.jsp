@@ -2,7 +2,7 @@
 <%@ page import="model.*" %>
 <%@ page import="java.sql.Timestamp, java.util.*, java.text.*" %>
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <title>Product Detail</title>
         <meta charset="UTF-8">

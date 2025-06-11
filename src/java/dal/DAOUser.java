@@ -17,11 +17,41 @@ public class DAOUser {
     private String status = "OK";
 
     public DAOUser() {
-        if (INSTANCE == null) {
-            con = new DBContext().connect;
-        } else {
-            INSTANCE = this;
+        con = new DBContext().connect;
+    }
+    
+    public User login(String email,String password){
+        
+        String sql = "SELECT u.*, r.role_name FROM Users u LEFT JOIN Role r ON u.role_id = r.id "
+                + "WHERE u.email = ? AND u.password = ? ";
+        try { PreparedStatement st = con.prepareStatement(sql);
+            st.setString(1, email);
+            st.setString(2, password);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                String mail = rs.getString("email");
+                String pass = rs.getString("password");
+                String phone = rs.getString("phone");
+                Date dob = rs.getDate("dob");
+                String address = rs.getString("address");
+                boolean gender = rs.getBoolean("gender");
+                Timestamp createdAt = rs.getTimestamp("created_at");
+
+                int roleId = rs.getInt("role_id");
+                String roleName = rs.getString("role_name");
+                Role role = new Role(roleId, roleName);
+
+                User u = new User(id, name, mail, pass, phone, dob, address, gender, role, createdAt);
+                return u;
+            }
+            rs.close();
+        } catch (Exception e) {
+            status = "Error at read Users " + e.getMessage();
         }
+           return null;
+       
     }
 
     public ArrayList<User> getUser() {
@@ -266,10 +296,13 @@ public class DAOUser {
         return status;
     }
 
-    public static void main(String[] args) {
-        ArrayList<User> ulist = DAOUser.INSTANCE.getUsersByRoleId(6);
-        for (int i = 0; i < ulist.size(); i++) {
-            System.out.println(ulist.get(i).getName());
-        }
-    }
+//    public static void main(String[] args) {
+////        ArrayList<User> ulist = DAOUser.INSTANCE.getUsersByRoleId(6);
+////        for (int i = 0; i < ulist.size(); i++) {
+////            System.out.println(ulist.get(i).getName());
+////        }
+//            User u = DAOUser.INSTANCE.login("john.smith@example.com","password123");
+//            System.out.println(u.getEmail()+"|"+u.getPassword()+"|" +u.getName());
+//    }
 }
+
