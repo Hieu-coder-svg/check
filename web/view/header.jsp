@@ -15,7 +15,7 @@
     <body>
         <div class="header">
             <div class="logo">
-                <img src="images/logo_1.png" alt="Logo Image">
+                <img src="images/logo_1.png" alt="Logo">
             </div>
             <div class="header-right">
             <h2 class="shop_name">Healthy Food</h2>

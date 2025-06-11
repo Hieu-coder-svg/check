@@ -64,7 +64,9 @@
     <body>
 
         <div class="welcome">
-            <img src="images/admin.jpg" alt="Admin Avatar" onclick="location.href = 'DisplayAccount?idRole=1'">
+            <a href="DisplayAccount?idRole=1">
+                <img src="images/admin.jpg" alt="Admin Avatar">
+            </a>
             <h2>Welcome "Admin 1"</h2>
         </div>
         <div class="dashboard">
